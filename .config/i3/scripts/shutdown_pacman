@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ -f /var/lib/pacman/db.lck ]; then
+    notify-send -u critical "Pacman is running" "You may want to wait for pacman to finish before shutdown. You can force shutdown (please dont) by running 'systemctl poweroff'.";
+    exit;
+fi
+#notify-send -u critical "AAAA" "AAAA";
+systemctl poweroff;
