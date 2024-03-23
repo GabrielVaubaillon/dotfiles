@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('BufWritePre', {
     group = vim.api.nvim_create_augroup("delete_trailing_space", { clear = true }),
     pattern = "*",
-    command = "%s:\\s\\+$::",
+    command = "%s/\\s\\+$//e",
 })
 
 -- Activate wrapping and spellcheck in txt and md files
