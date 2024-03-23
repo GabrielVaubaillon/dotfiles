@@ -1,5 +1,6 @@
 
 -- leader key
+vim.keymap.set('n', '<Space>', '<NOP>')
 vim.g.mapleader = " " 
 vim.g.maplocalleader = "\\"
 
@@ -16,12 +17,17 @@ vim.keymap.set('n', '%', '%zz')
 vim.keymap.set('n', '*', '*zz')
 vim.keymap.set('n', '#', '#zz')
 
--- use H and L for start and end of line
-vim.keymap.set('n', 'H', '_')
-vim.keymap.set('n', 'L', '$')
-vim.keymap.set('v', 'H', '_')
-vim.keymap.set('v', 'L', '$')
-
 -- Move selected text up/down with Alt+{jk}
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
+
+-- PLUGINS REMAPS
+-----------------
+
+-- Gitsigns
+-- move between chunks
+vim.keymap.set('n', '<leader>]c', ':Gitsigns next_hunk<Enter>')
+vim.keymap.set('n', '<leader>[c', ':Gitsigns prev_hunk<Enter>')
+vim.keymap.set('n', '<leader>hp', ':Gitsigns preview_hunk<Enter>')
+vim.keymap.set('n', '<leader>hu', ':Gitsigns reset_hunk<Enter>')
+

@@ -26,6 +26,13 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
+-- Automatically delete trailing space at save
+vim.api.nvim_create_autocmd('BufWritePre', {
+    group = vim.api.nvim_create_augroup("delete_trailing_space", { clear = true }),
+    pattern = "*",
+    command = "%s:\\s\\+$::",
+})
+
 -- Activate wrapping and spellcheck in txt and md files
 -- NOTE: was not working when tesing. please dig further
 -- vim.api.nvim_create_autocmd({ "FileType" }, {

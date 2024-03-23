@@ -18,5 +18,6 @@ require("lazy").setup({
   "nvim-lualine/lualine.nvim",
   {"catppuccin/nvim", name = "catppuccin", priority = 1000},
   {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+  "lewis6991/gitsigns.nvim",
 })
 
