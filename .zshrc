@@ -18,7 +18,7 @@ ZSH_THEME="gabriel"
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Personal list of best themes : 
+# Personal list of best themes :
 # arrow kardan linuxonly macovsky minimal nanotech refined simple strug terminal party tonotdo ys
 
 # Uncomment the following line to use case-sensitive completion.
@@ -102,16 +102,16 @@ setopt HIST_FIND_NO_DUPS
 # export ARCHFLAGS="-arch x86_64"
 
 function countdown(){
-   date1=$((`date +%s` + $1)); 
-   while [ "$date1" -ge `date +%s` ]; do 
+   date1=$((`date +%s` + $1));
+   while [ "$date1" -ge `date +%s` ]; do
      echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
      sleep 0.1
    done
 }
 function stopwatch(){
-  date1=`date +%s`; 
-   while true; do 
-    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; 
+  date1=`date +%s`;
+   while true; do
+    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
     sleep 0.1
    done
 }
@@ -126,7 +126,7 @@ function stopwatch(){
 alias "l1"="ls -1"
 alias "la"="ls -a"
 alias "cd.."="cd .."
-alias "kb"="setxkbmap -model pc105 -layout ie,fr -option grp:alt_shift_toggle -option caps:swapescape"
+alias "kb"="setxkbmap -model pc105 -layout gb,fr -option grp:alt_shift_toggle -option caps:swapescape"
 alias "sm"="~/.screenlayout/second_monitor.sh"
 alias "meteo"="curl 'wttr.in/cork'"
 alias "vim"="nvim"
