@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd('VimResized', {
 
 -- Load help vertical window rather than horizontal
 vim.api.nvim_create_autocmd('FileType', {
-    group = vim. api.nvim_create_augroup("vertical_help", { clear = true }),
+    group = vim.api.nvim_create_augroup("vertical_help", { clear = true }),
     pattern = "help",
     callback = function()
         vim.bo.bufhidden = "unload"
@@ -30,7 +30,13 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('BufWritePre', {
     group = vim.api.nvim_create_augroup("delete_trailing_space", { clear = true }),
     pattern = "*",
-    command = "%s/\\s\\+$//e",
+    callback = function()
+        -- Save cursor position to restore later
+        local curpos = vim.api.nvim_win_get_cursor(0)
+        -- Search and replace trailing whitespaces
+        vim.cmd([[keeppatterns %s/\s\+$//e]])
+        vim.api.nvim_win_set_cursor(0, curpos)
+    end,
 })
 
 -- Activate wrapping and spellcheck in txt and md files

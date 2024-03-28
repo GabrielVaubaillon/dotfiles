@@ -46,6 +46,9 @@ vim.opt.shiftwidth = 4
 -- disable text wrap
 vim.opt.wrap = false
 
+-- color column at 120 characters
+vim.opt.colorcolumn = '120'
+
 -- better splitting
 vim.opt.splitbelow = true
 vim.opt.splitright = true

@@ -1,7 +1,7 @@
 
 -- leader key
 vim.keymap.set('n', '<Space>', '<NOP>')
-vim.g.mapleader = " " 
+vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Keep the buffer centered
@@ -20,6 +20,15 @@ vim.keymap.set('n', '#', '#zz')
 -- Move selected text up/down with Alt+{jk}
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
+
+-- System clipboard paste with leader P
+vim.keymap.set('v', '<leader>p', '"+p')
+vim.keymap.set('n', '<leader>p', '"+p')
+vim.keymap.set('n', '<leader>P', '"+P') -- (uppercase)
+
+-- Activate Diff quicly
+vim.keymap.set('n', '<leader>dt', ':diffthis<Enter>')
+vim.keymap.set('n', '<leader>do', ':diffoff<Enter>')
 
 -- PLUGINS REMAPS
 -----------------
