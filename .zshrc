@@ -18,7 +18,7 @@ ZSH_THEME="gabriel"
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Personal list of best themes :
+# gvaubail list of best themes :
 # arrow kardan linuxonly macovsky minimal nanotech refined simple strug terminal party tonotdo ys
 
 # Uncomment the following line to use case-sensitive completion.
@@ -73,8 +73,17 @@ ZSH_THEME="gabriel"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(pip
-	web-search)
+plugins=(
+    pip
+    k # colorfull ls + git status
+    #zsh-autosuggestions
+    zsh-syntax-highlighting
+)
+
+# plugins
+# k: git clone https://github.com/supercrabtree/k ~/.oh-my-zsh/custom/plugins/k
+# zsh-syntax-highlighting: git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# zsh-autosuggestions: git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,21 +125,16 @@ function stopwatch(){
    done
 }
 
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
+
 # aliases
 alias "l1"="ls -1"
 alias "la"="ls -a"
 alias "cd.."="cd .."
 alias "kb"="setxkbmap -model pc105 -layout gb,fr -option grp:alt_shift_toggle -option caps:swapescape"
-alias "sm"="~/.screenlayout/second_monitor.sh"
-alias "meteo"="curl 'wttr.in/cork'"
 alias "vim"="nvim"
 alias "nv"="nvim"
 
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
