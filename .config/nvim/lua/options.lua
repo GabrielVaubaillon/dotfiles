@@ -31,17 +31,17 @@ vim.opt.listchars = {
     nbsp = '×'
 }
 
--- Set tabs as 4 space
+-- Set tabs as 4 space by default
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
+vim.opt.shiftwidth = 0
 
 -- wraped lines continue with same indent
 vim.opt.breakindent = true
 
 -- enable auto indenting
 vim.opt.smartindent = true
-vim.opt.shiftwidth = 4
 
 -- disable text wrap
 vim.opt.wrap = false
