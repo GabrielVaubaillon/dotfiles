@@ -5,6 +5,9 @@ require('lspconfig').clangd.setup {}
 -- require('lspconfig').pylsp.setup{}
 require('lspconfig').pyright.setup {}
 
+-- YAML
+require('lspconfig').yamlls.setup {}
+
 -- Lua
 require('lspconfig').lua_ls.setup {
   on_init = function(client)
