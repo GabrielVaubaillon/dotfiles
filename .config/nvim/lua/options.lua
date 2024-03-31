@@ -78,4 +78,3 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Autocompletion options
 vim.opt.completeopt = { 'menuone', 'preview', 'noselect' }
-

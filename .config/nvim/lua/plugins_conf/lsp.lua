@@ -1,16 +1,15 @@
-
 -- C
-require('lspconfig').clangd.setup{}
+require('lspconfig').clangd.setup {}
 
 -- Python
 -- require('lspconfig').pylsp.setup{}
-require('lspconfig').pyright.setup{}
+require('lspconfig').pyright.setup {}
 
 -- Lua
 require('lspconfig').lua_ls.setup {
   on_init = function(client)
     local path = client.workspace_folders[1].name
-    if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+    if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
       return
     end
 
@@ -38,4 +37,3 @@ require('lspconfig').lua_ls.setup {
     Lua = {}
   }
 }
-

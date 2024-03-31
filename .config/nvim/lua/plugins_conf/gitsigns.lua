@@ -43,4 +43,3 @@ require('gitsigns').setup {
 }
 
 -- keymaps in keymaps.lua file
-

@@ -16,8 +16,8 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins list
 require("lazy").setup({
   "nvim-lualine/lualine.nvim",
-  {"catppuccin/nvim", name = "catppuccin", priority = 1000},
-  {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "lewis6991/gitsigns.nvim",
   "neovim/nvim-lspconfig",
   "Darazaki/indent-o-matic",

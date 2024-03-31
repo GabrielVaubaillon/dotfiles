@@ -10,4 +10,3 @@ require("plugins_conf.comment")
 require("plugins_conf.gitsigns")
 require("plugins_conf.lsp")
 require("plugins_conf.indent-o-matic")
-

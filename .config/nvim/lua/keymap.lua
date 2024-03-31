@@ -1,4 +1,3 @@
-
 -- leader key
 vim.keymap.set('n', '<Space>', '<NOP>')
 vim.g.mapleader = " "
@@ -22,8 +21,8 @@ vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
 -- System clipboard copy paste with leader
-vim.keymap.set({'v', 'n'}, '<leader>p', '"+p')
-vim.keymap.set({'v', 'n'}, '<leader>y', '"+y')
+vim.keymap.set({ 'v', 'n' }, '<leader>p', '"+p')
+vim.keymap.set({ 'v', 'n' }, '<leader>y', '"+y')
 vim.keymap.set('n', '<leader>P', '"+P') -- (uppercase)
 
 -- Activate Diff quicly
@@ -51,4 +50,3 @@ vim.keymap.set('n', '<leader>]c', ':Gitsigns next_hunk<Enter>')
 vim.keymap.set('n', '<leader>[c', ':Gitsigns prev_hunk<Enter>')
 vim.keymap.set('n', '<leader>hp', ':Gitsigns preview_hunk<Enter>')
 vim.keymap.set('n', '<leader>hu', ':Gitsigns reset_hunk<Enter>')
-
