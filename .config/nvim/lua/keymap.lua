@@ -32,6 +32,9 @@ vim.keymap.set('n', '<leader>do', ':diffoff<Enter>')
 -- PLUGINS REMAPS
 -----------------
 
+-- UndoTree
+vim.keymap.set('n', '<A-u>', ':UndotreeToggle<Enter>')
+
 -- Comment (keymaps are in plugin conf (nvim/lua/plugins_conf/comment.lua))
 -- '<Leader>/' for toggle comment
 -- '<Leader>b/' for toggle block comment

@@ -19,6 +19,7 @@ require("lazy").setup({
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "lewis6991/gitsigns.nvim",
+  "mbbill/undotree",
   "neovim/nvim-lspconfig",
   "Darazaki/indent-o-matic",
   "numToStr/Comment.nvim",
