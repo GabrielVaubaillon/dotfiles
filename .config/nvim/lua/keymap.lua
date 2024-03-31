@@ -21,9 +21,9 @@ vim.keymap.set('n', '#', '#zz')
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
 
--- System clipboard paste with leader P
-vim.keymap.set('v', '<leader>p', '"+p')
-vim.keymap.set('n', '<leader>p', '"+p')
+-- System clipboard copy paste with leader
+vim.keymap.set({'v', 'n'}, '<leader>p', '"+p')
+vim.keymap.set({'v', 'n'}, '<leader>y', '"+y')
 vim.keymap.set('n', '<leader>P', '"+P') -- (uppercase)
 
 -- Activate Diff quicly
@@ -33,6 +33,9 @@ vim.keymap.set('n', '<leader>do', ':diffoff<Enter>')
 -- PLUGINS REMAPS
 -----------------
 
+-- Comment (keymaps are in plugin conf (nvim/lua/plugins_conf/comment.lua))
+-- '<Leader>/' for toggle comment
+-- '<Leader>b/' for toggle block comment
 
 -- LSP
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)

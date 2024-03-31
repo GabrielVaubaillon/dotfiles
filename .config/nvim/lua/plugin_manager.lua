@@ -21,5 +21,6 @@ require("lazy").setup({
   "lewis6991/gitsigns.nvim",
   "neovim/nvim-lspconfig",
   "Darazaki/indent-o-matic",
+  "numToStr/Comment.nvim",
 })
 
