@@ -65,16 +65,16 @@ vim.opt.showmode = false
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
 
--- Color a column
--- TODO: get working with transparency
--- vim.opt.colorcolumn = "80"
-
 -- jump to match immediatly when searching
 vim.opt.incsearch = true
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- When splitting, keep the old window left (vertical), up (horizontal)
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 -- Autocompletion options
 vim.opt.completeopt = { 'menuone', 'preview', 'noselect' }

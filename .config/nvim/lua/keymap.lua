@@ -10,15 +10,27 @@ vim.keymap.set('n', '{', '{zz')
 vim.keymap.set('n', '}', '}zz')
 vim.keymap.set('n', 'N', 'Nzz')
 vim.keymap.set('n', 'n', 'nzz')
-vim.keymap.set('n', '<C-i', '<C-izz')
+vim.keymap.set('n', '<C-i>', '<C-i>zz')
 vim.keymap.set('n', '<C-o>', '<C-o>zz')
 vim.keymap.set('n', '%', '%zz')
 vim.keymap.set('n', '*', '*zz')
 vim.keymap.set('n', '#', '#zz')
 
+-- Move between windows without <C-W>
+vim.keymap.set('n', '<C-h>', '<C-W>h')
+vim.keymap.set('n', '<C-j>', '<C-W>j')
+vim.keymap.set('n', '<C-k>', '<C-W>k')
+vim.keymap.set('n', '<C-l>', '<C-W>l')
+
 -- Move selected text up/down with Alt+{jk}
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
+
+-- Move to the last visited buffer
+vim.keymap.set('n', '<Leader>b', ":b#<Enter>")
+
+-- Easy move to buffers (show opened buffers when gb)
+vim.keymap.set('n', 'gb', ":ls<Enter>:b ")
 
 -- System clipboard copy paste with leader
 vim.keymap.set({ 'v', 'n' }, '<leader>p', '"+p')
@@ -37,7 +49,7 @@ vim.keymap.set('n', '<A-u>', ':UndotreeToggle<Enter>')
 
 -- Comment (keymaps are in plugin conf (nvim/lua/plugins_conf/comment.lua))
 -- '<Leader>/' for toggle comment
--- '<Leader>b/' for toggle block comment
+-- '<Leader>?' for toggle block comment
 
 -- LSP
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)

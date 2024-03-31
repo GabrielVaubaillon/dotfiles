@@ -13,7 +13,7 @@ require('Comment').setup(
             line = '<Leader>/',
             ---Block-comment toggle keymap
             -- block = 'gbc',
-            block = '<Leader>b/',
+            block = '<Leader>?',
         },
         ---LHS of operator-pending mappings in NORMAL and VISUAL mode
         opleader = {
@@ -22,7 +22,7 @@ require('Comment').setup(
             line = '<Leader>/',
             ---Block-comment keymap
             -- block = 'gb',
-            block = '<Leader>b/',
+            block = '<Leader>?',
         },
         ---LHS of extra mappings
         extra = {
