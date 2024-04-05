@@ -13,9 +13,9 @@ alias lal='ls -al'
 alias tree="tree -C -a -I '.git'"
 
 # need force to overwrite
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias rm='rm -iv'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
 
 # git
 alias gs='git status'

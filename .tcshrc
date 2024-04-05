@@ -1,0 +1,97 @@
+# Adding personal programs and scripts to PATH
+set path = ($HOME/bin $HOME/scripts $path)
+
+# Create the config directory if doesn't exist
+set tcsh_config = "$HOME/.config/tcsh"
+if (! -d $tcsh_config ) then
+    echo "Create TCSH config directory $tcsh_config"
+    mkdir -p $tcsh_config
+endif
+
+# KEYS
+# ----
+
+# Del
+bindkey "^[[3~" delete-char
+
+# ^Del and ^Backspace
+bindkey "^[[3;5~" delete-word
+bindkey "^H" backward-delete-word
+
+# ^-Left and ^-Right
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+
+# ^W only delete a word
+bindkey "^W" backward-delete-word
+
+# MISC
+# ----
+
+# No beep
+set nobeep
+
+# > cannot overwrite a file. You have to do >!
+set noclobber
+
+# Do not exit on end-of-file.  Require the use of exit or logout instead.
+# However,  ten  consecutive EOFs will cause the shell to exit anyway,
+# to avoid the shell hanging if its tty goes away.
+set ignoreeof = '10'
+
+# report status of job asynchronously
+set notify
+
+# HISTORY
+# -------
+
+set histfile="$HOME/.tcsh_history"
+set history=10000
+set savehist=(10000 merge)
+
+# expand in history
+set autoexpand
+
+# COMPLETION
+# ----------
+
+# Show possible completions
+set autolist
+
+# Case insensitive completion
+set complete = 'enhance'
+
+# FILESYSTEM NAVIGATION
+# ---------------------
+alias cd "pushd"
+# Do not store duplicates in the stack.
+set dunique
+# Do not print the directory stack after pushd or popd.
+set pushdsilent
+# pushd without args go to home
+set pushdtohome
+
+# d will display the directory stack,
+# you can then move in the stack using 1 to 9 as aliases
+alias d "dirs -v | tail -n +2 | head -n 9"
+alias 1 "cd =1"
+alias 2 "cd =2"
+alias 3 "cd =3"
+alias 4 "cd =4"
+alias 5 "cd =5"
+alias 6 "cd =6"
+alias 7 "cd =7"
+alias 8 "cd =8"
+alias 9 "cd =9"
+
+# PROMPT
+# ------
+set prompt = "╭─%B[tcsh][%j] %b%n@%M%B %~/\n%b╰─%B▶%b "
+
+# ALIASES
+# -------
+
+alias 'reload' 'source $HOME/.tcshrc'
+# tcsh alias are not the same as bash and zsh, need to do a little sed magic
+cat "$HOME/.aliases" | sed 's/=/ /' >! "$tcsh_config/tcsh_aliases" && source "$tcsh_config/tcsh_aliases";
+
