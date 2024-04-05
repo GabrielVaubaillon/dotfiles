@@ -132,7 +132,7 @@ if [[ -a $k_src ]]; then
     source $k_src
 else
     echo "Installing k plugin"
-    git clone "https://github.com/supercrabtree/k" "$zsh_config/zsh-k"
+    git clone "https://github.com/supercrabtree/k" "$zsh_config/zsh-k" &&
     source $k_src
 fi
 
