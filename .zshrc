@@ -1,140 +1,135 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# good resource: https://thevaluable.dev/zsh-install-configure-mouseless/
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/gabriel/.oh-my-zsh"
-export PATH=/home/gabriel/bin/:$PATH #My personal programs
+# Adding personal programs and scripts to PATH
+typeset -U path PATH
+path=($HOME/bin $HOME/scripts $path)
+export PATH
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="gabriel"
-#ZSH_THEME="avit"
+# Create the config directory if doesn't exist
+local zsh_config="$HOME/.config/zsh"
+if [ ! -d $zsh_config ]; then
+    echo "Create ZSH config directory $zsh_config"
+    mkdir -p $zsh_config
+fi
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# KEYS
+# ----
 
-# gvaubail list of best themes :
-# arrow kardan linuxonly macovsky minimal nanotech refined simple strug terminal party tonotdo ys
+# Del
+bindkey "^[[3~" delete-char
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# ^Del and ^Backspace
+bindkey "^[[3;5~" kill-word
+bindkey "^H" backward-kill-word
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# ^-Left and ^-Right
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# HISTORY
+# -------
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+HISTFILE="$HOME/.zhistory"
+HISTSIZE=10000
+SAVEHIST=10000
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# Share history in every terminal session
+setopt share_history
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# Do not record an event starting with a space.
+setopt hist_ignore_space
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# Search history with arrow keys
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# AUTOCOMPLETION
+# --------------
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+autoload -U compinit && compinit
+zmodload -i zsh/complist
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+# case-insensitive / not only prefix matching
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# add color when completing files / directories
+eval "dircolors > $zsh_config/ls_colors" && source "$zsh_config/ls_colors";
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+# Highlight current selection
+zstyle ':completion:*' menu select
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# Autoselect first match
+setopt menu_complete
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    pip
-    k # colorfull ls + git status
-    #zsh-autosuggestions
-    zsh-syntax-highlighting
-)
+# Include hidden files in autocomplete
+_comp_options+=(globdots)
 
-# plugins
-# k: git clone https://github.com/supercrabtree/k ~/.oh-my-zsh/custom/plugins/k
-# zsh-syntax-highlighting: git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-# zsh-autosuggestions: git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+# FILESYSTEM NAVIGATION
+# ---------------------
 
-source $ZSH/oh-my-zsh.sh
+# Push the current directory visited on the stack.
+setopt auto_pushd
+# Do not store duplicates in the stack.
+setopt pushd_ignore_dups
+# Do not print the directory stack after pushd or popd.
+setopt pushd_silent
 
-# User configuration
+# d will display the directory stack,
+# you can then move in the stack using 1 to 9 as aliases
+local max_alias_stack=9
+alias d="dirs -v | head -n $(($max_alias_stack+1)) | tail -n ${max_alias_stack}"
+for index ({1..$max_alias_stack}) alias "$index"="cd +${index}"; unset index;
 
-# Don't show duplicate command in history
-setopt HIST_FIND_NO_DUPS
+# bd : go back to a parent directory, support completion
+local bd_src="$zsh_config/zsh-bd/bd.zsh"
+if [[ -a $bd_src ]]; then
+    source $bd_src
+else
+    echo "Installing bd plugin"
+    git clone "https://github.com/Tarrasch/zsh-bd.git" "$zsh_config/zsh-bd"
+    source $bd_src
+fi
 
-# Delete all previous duplicate from history
-# setopt HIST_IGNORE_ALL_DUPS
+# k : better ls -l, with git status of file & directories
+local k_src="$zsh_config/zsh-k/k.sh"
+if [[ -a $k_src ]]; then
+    source $k_src
+else
+    echo "Installing k plugin"
+    git clone "https://github.com/supercrabtree/k" "$zsh_config/zsh-k"
+    source $k_src
+fi
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# PROMPT
+# ------
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+autoload colors && colors
+local user_host="%B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m%{$reset_color%}%b"
+local current_dir="%B%{$fg[blue]%}%~ %{$reset_color%}%b"
+local return_code="%B%(?..%{$fg[red]%}%? ↵)%{$reset_color%}%b"
+local current_jobs="%B%(1j.%{$fg[blue]%}(%j jobs).)%{$reset_color%}%b"
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+NEWLINE=$'\n' # Avoid issue with redraw
+PROMPT="╭─${user_host} ${current_dir}${NEWLINE}╰─%B▶%b "
+RPROMPT="${return_code} ${current_jobs}"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# ALIASES
+# -------
 
-function countdown(){
-   date1=$((`date +%s` + $1));
-   while [ "$date1" -ge `date +%s` ]; do
-     echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
-     sleep 0.1
-   done
-}
-function stopwatch(){
-  date1=`date +%s`;
-   while true; do
-    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
-    sleep 0.1
-   done
-}
+alias 'reload'='source $HOME/.zshrc'
+source "$HOME/.aliases"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
-# aliases
-alias "l1"="ls -1"
-alias "la"="ls -a"
-alias "cd.."="cd .."
-alias "kb"="setxkbmap -model pc105 -layout gb,fr -option grp:alt_shift_toggle -option caps:swapescape"
-alias "vim"="nvim"
-alias "nv"="nvim"
-
+# Syntax Highlighting - must be loaded last
+local syntax_hl_src="$zsh_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -a $syntax_hl_src ]]; then
+    source $syntax_hl_src
+else
+    echo "Installing Syntax Highlighting plugin"
+    git clone "https://github.com/zsh-users/zsh-syntax-highlighting.git" "$zsh_config/zsh-syntax-highlighting/"
+    source $syntax_hl_src
+fi

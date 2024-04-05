@@ -1,0 +1,38 @@
+alias kb='setxkbmap -model pc105 -layout gb,fr -option grp:alt_shift_toggle -option caps:swapescape'
+alias vim='nvim'
+alias nv='nvim'
+alias nvimd='nvim --noplugin -u NONE' # launch nvim without any plugin or config (nvim debug)
+
+# ls
+alias ls='ls --color=auto'
+alias l='ls -l'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -al'
+alias lal='ls -al'
+alias tree="tree -C -a -I '.git'"
+
+# need force to overwrite
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -iv'
+
+# git
+alias gs='git status'
+# alias ga='git add'
+# alias gp='git push'
+# alias gpo='git push origin'
+# alias gtd='git tag --delete'
+# alias gtdr='git tag --delete origin'
+# alias gr='git branch -r'
+# alias gplo='git pull origin'
+# alias gb='git branch '
+# alias gc='git commit'
+# alias gd='git diff'
+# alias gco='git checkout '
+# alias gl='git log'
+# alias gr='git remote'
+# alias grs='git remote show'
+# alias glo='git log --pretty="oneline"'
+# alias glol='git log --graph --oneline --decorate'
+
