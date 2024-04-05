@@ -8,11 +8,11 @@ esac
 export PATH="$HOME/bin:$HOME/scripts:$PATH"
 
 # Create the config directory if doesn't exist
-bash_config="$HOME/.config/bash"
-if [ ! -d $bash_config ]; then
-  echo "Create BASH config directory $bash_config"
-  mkdir -p $bash_config
-fi
+#bash_config="$HOME/.config/bash"
+#if [ ! -d $bash_config ]; then
+#  echo "Create BASH config directory $bash_config"
+#  mkdir -p $bash_config
+#fi
 
 # KEYS
 # ----
