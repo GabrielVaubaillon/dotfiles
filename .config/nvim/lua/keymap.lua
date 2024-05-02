@@ -15,6 +15,8 @@ vim.keymap.set('n', '<C-o>', '<C-o>zz')
 vim.keymap.set('n', '%', '%zz')
 vim.keymap.set('n', '*', '*zz')
 vim.keymap.set('n', '#', '#zz')
+vim.keymap.set('n', '[c', '[czz')
+vim.keymap.set('n', ']c', ']czz')
 
 -- Move between windows without <C-W>
 vim.keymap.set('n', '<C-h>', '<C-W>h')
