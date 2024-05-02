@@ -59,7 +59,7 @@ HISTCONTROL="ignorespace"
 # AUTOCOMPLETION
 # --------------
 
-# case-insensitive / not only prefix matching
+# case-insensitive
 bind 'set completion-ignore-case On'
 
 # add color when completing files / directories
