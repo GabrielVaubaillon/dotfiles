@@ -43,6 +43,15 @@ vim.keymap.set('n', '<leader>P', '"+P') -- (uppercase)
 vim.keymap.set('n', '<leader>dt', ':diffthis<Enter>')
 vim.keymap.set('n', '<leader>do', ':diffoff<Enter>')
 
+-- toggle spell checking
+vim.keymap.set('n', '<leader>s', ':set spell!<Enter>')
+
+-- toggle wrap
+vim.keymap.set('n', '<leader>w', ':set wrap!<Enter>')
+
+-- toggle whitespace
+vim.keymap.set('n', '<leader>l', ':set list!<Enter>')
+
 -- PLUGINS REMAPS
 -----------------
 

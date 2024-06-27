@@ -5,7 +5,7 @@ vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- Alway insert signcolumn (git + - ~ column)
+-- Always insert signcolumn (git + - ~ column)
 vim.opt.signcolumn = 'yes:1'
 
 -- decrease update time to 200ms
@@ -37,7 +37,7 @@ vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 0
 
--- wraped lines continue with same indent
+-- wrapped lines continue with same indent
 vim.opt.breakindent = true
 
 -- enable auto indenting
@@ -47,7 +47,12 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 
 -- color column at 120 characters
-vim.opt.colorcolumn = '120'
+vim.opt.colorcolumn = '100'
+
+-- spell checking
+vim.opt.spell = false
+vim.opt.spelllang = { 'en', 'fr' }
+vim.opt.spellsuggest = { 'best', 5 }
 
 -- better splitting
 vim.opt.splitbelow = true
@@ -59,13 +64,13 @@ vim.opt.inccommand = 'split'
 -- Show current line
 vim.opt.cursorline = true
 
--- Dont show mode (already in my status bar)
+-- Don't show mode (already in my status bar)
 vim.opt.showmode = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
 
--- jump to match immediatly when searching
+-- jump to match immediately when searching
 vim.opt.incsearch = true
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
