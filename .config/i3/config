@@ -286,9 +286,10 @@ bindsym $mod+p exec --no-startup-id "scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-sc
 # need the --release , because if not, the command goes as soon as I push the button, too soon
 bindsym --release $mod+o exec --no-startup-id "scrot -s \\"/home/gabriel/Pictures/Screenshots/%Y-%m-%d-%T-screenzone.png\\""
 
-
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
+
+bindsym $mod+z exec --no-startup-id "setxkbmap -model pc105 -layout 'ie,fr' -option 'grp:alt_shift_toggle' -option 'caps:swapescape'"
 
 ##########################################
 # configuration for workspace behaviour: #
