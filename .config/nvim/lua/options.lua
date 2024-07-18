@@ -46,7 +46,7 @@ vim.opt.smartindent = true
 -- disable text wrap
 vim.opt.wrap = false
 
--- color column at 120 characters
+-- color column at 100 characters
 vim.opt.colorcolumn = '100'
 
 -- spell checking
