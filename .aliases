@@ -14,6 +14,8 @@ alias lla='ls -alh'
 alias lal='ls -alh'
 alias tree="tree -C -a -I '.git'"
 
+alias grep='grep --color'
+
 # need force to overwrite
 alias cp='cp -i'
 alias mv='mv -i'
