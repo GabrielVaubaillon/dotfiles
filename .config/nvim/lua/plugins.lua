@@ -15,14 +15,23 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins list
 require("lazy").setup({
+  -- better visual status line
   "nvim-lualine/lualine.nvim",
+  -- better theming
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  -- syntax highlighting (and other sweet things around understanding syntax)
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  -- visual indications on git-modified files
   "lewis6991/gitsigns.nvim",
+  -- access the nvim undotree, never lose work
   "mbbill/undotree",
+  -- Language Servers config
   "neovim/nvim-lspconfig",
+  -- Auto detect indent of current file
   "Darazaki/indent-o-matic",
+  -- Toggle comments with a keybinding
   "numToStr/Comment.nvim",
+  -- Preview Markdown
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -30,3 +39,13 @@ require("lazy").setup({
     build = function() vim.fn["mkdp#util#install"]() end,
   },
 })
+
+-- plugins config
+require("plugins_conf.colors") -- theme first
+require("plugins_conf.lualine")
+require("plugins_conf.treesitter")
+require("plugins_conf.comment")
+require("plugins_conf.gitsigns")
+require("plugins_conf.undotree")
+require("plugins_conf.lsp")
+require("plugins_conf.indent-o-matic")

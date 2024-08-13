@@ -42,4 +42,7 @@ require('gitsigns').setup {
   },
 }
 
--- keymaps in keymaps.lua file
+vim.keymap.set('n', '<leader>]c', ':Gitsigns next_hunk<Enter>')
+vim.keymap.set('n', '<leader>[c', ':Gitsigns prev_hunk<Enter>')
+vim.keymap.set('n', '<leader>hp', ':Gitsigns preview_hunk<Enter>')
+vim.keymap.set('n', '<leader>hu', ':Gitsigns reset_hunk<Enter>')
