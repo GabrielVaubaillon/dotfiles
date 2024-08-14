@@ -116,16 +116,6 @@ local max_alias_stack=9
 alias d="dirs -v | tail -n +2 | head -n $max_alias_stack"
 for index ({1..$max_alias_stack}) alias "$index"="cd +${index}"; unset index;
 
-# bd : go back to a parent directory, support completion
-local bd_src="$zsh_config/zsh-bd/bd.zsh"
-if [[ -a $bd_src ]]; then
-    source $bd_src
-else
-    echo "Installing bd plugin"
-    git clone "https://github.com/Tarrasch/zsh-bd.git" "$zsh_config/zsh-bd" &&
-    source $bd_src
-fi
-
 # k : better ls -l, with git status of file & directories
 local k_src="$zsh_config/zsh-k/k.sh"
 if [[ -a $k_src ]]; then
@@ -139,15 +129,26 @@ fi
 # PROMPT
 # ------
 
-autoload colors && colors
-local user_host="%B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m%{$reset_color%}%b"
-local current_dir="%B%{$fg[blue]%}%~/%{$reset_color%}%b"
-local return_code="%B%(?..%{$fg[red]%}%? ↵)%{$reset_color%}%b"
-local current_jobs="%B%(1j.%{$fg[blue]%}(%j jobs).)%{$reset_color%}%b"
+function () {
+    autoload colors && colors
+    local git_prompt_src="$zsh_config/zsh-git-prompt/git-prompt.zsh"
+    if [[ -a $git_prompt_src ]]; then
+        source $git_prompt_src
+    else
+        echo "Installing Git Prompt Plugin"
+        git clone "https://github.com/woefe/git-prompt.zsh.git" "$zsh_config/zsh-git-prompt/" &&
+        source $git_prompt_src
+    fi
 
-NEWLINE=$'\n' # Avoid issue with redraw
-PROMPT="╭─${user_host} ${current_dir}${NEWLINE}╰─%B▶%b "
-RPROMPT="${return_code} ${current_jobs}"
+    local user_host="%B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m%{$reset_color%}%b"
+    local current_dir="%B%{$fg[blue]%}%~/%{$reset_color%}%b"
+    local return_code="%B%(?..%{$fg[red]%}%? ↵)%{$reset_color%}%b"
+    local current_jobs="%B%(1j.%{$fg[blue]%}(%j jobs).)%{$reset_color%}%b"
+
+    NEWLINE=$'\n' # Avoid issue with redraw
+    PROMPT="╭─${user_host} ${current_dir} \$(gitprompt)${NEWLINE}╰─%B▶%b "
+    RPROMPT="${return_code} ${current_jobs}"
+}
 
 # ALIASES
 # -------
