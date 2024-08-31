@@ -84,6 +84,10 @@ alias 7 "cd =7"
 alias 8 "cd =8"
 alias 9 "cd =9"
 
+setenv DIR_BOOKMARKS "$HOME/.dir_bookmarks"
+alias bkm "pwd >> $DIR_BOOKMARKS && sort --unique --output $DIR_BOOKMARKS $DIR_BOOKMARKS"
+alias cdg 'cd `$HOME/.config/tcsh/fzf_bookmarked_dirs.tcsh \!*`'
+
 # PROMPT
 # ------
 set prompt = "╭─%B[tcsh][%j] %b%n@%M%B %~/\n%b╰─%B▶%b "
