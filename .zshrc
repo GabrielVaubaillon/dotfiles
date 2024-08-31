@@ -110,6 +110,33 @@ setopt pushd_silent
 # pushd without args go to home
 setopt pushd_to_home
 
+# Bookmarks for directories, with FZF
+DIR_BOOKMARKS="$HOME/.dir_bookmarks"
+alias bkm="pwd >> $DIR_BOOKMARKS && sort --unique --output $DIR_BOOKMARKS $DIR_BOOKMARKS"
+cdg() {
+    local dest
+    if [[ $# > 1 ]]; then
+        echo "ERROR: too many arguments. $# given, expecting 0 or 1.\n---"
+        echo "Navigate to a bookmarked directory with fzf.\nusage: cdg [pattern]"
+        return 1
+    fi
+    if [[ $# == 1 && ( $1 == "help" || $1 == "--help" || $1 == "-h" ) ]]; then
+        echo "Navigate to a bookmarked directory with fzf.\nusage: cdg [pattern]"
+        echo "Bookmarks file: $DIR_BOOKMARKS"
+        return 0
+    fi
+    if [[ $# == 0 ]]; then
+        dest=$(fzf < $DIR_BOOKMARKS)
+    else
+        dest=$(fzf --select-1 --query $1 < $DIR_BOOKMARKS)
+    fi
+    if [[ ! -z $dest ]]; then
+        cd $dest
+        return 0
+    fi
+    return 1
+}
+
 # d will display the directory stack,
 # you can then move in the stack using 1 to 9 as aliases
 local max_alias_stack=9
