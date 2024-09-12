@@ -142,6 +142,9 @@ vim.keymap.set('n', '<leader>w', ':set wrap!<Enter>')
 -- toggle whitespace
 vim.keymap.set('n', '<leader>l', ':set list!<Enter>')
 
+-- toggle line numbers
+vim.keymap.set('n', '<leader>n', ':set nu! rnu!<Enter>')
+
 -- AUTOCOMMANDS
 ---------------
 
