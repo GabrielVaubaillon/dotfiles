@@ -38,6 +38,8 @@ require("lazy").setup({
     ft = { "markdown" },
     build = function() vim.fn["mkdp#util#install"]() end,
   },
+  -- indent guides
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", }
 })
 
 -- plugins config
@@ -49,3 +51,4 @@ require("plugins_conf.gitsigns")
 require("plugins_conf.undotree")
 require("plugins_conf.lsp")
 require("plugins_conf.indent-o-matic")
+require("plugins_conf.ibl")
