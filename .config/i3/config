@@ -277,11 +277,8 @@ bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
 bindsym $mod+Shift+x exec --no-startup-id bitwarden-desktop
 bindsym $mod+x exec --no-startup-id thunar
-#bindsym $mod+q exec --no-startup-id qalculate-qt
-#bindsym Print exec "scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png"
-bindsym $mod+p exec --no-startup-id "scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png"
-# need the --release , because if not, the command goes as soon as I push the button, too soon
-bindsym --release $mod+o exec --no-startup-id "scrot -s \\"/home/gabriel/Pictures/Screenshots/%Y-%m-%d-%T-screenzone.png\\""
+bindsym $mod+p exec --no-startup-id "flameshot full -p ~/Pictures/Screenshots/"
+bindsym $mod+Shift+s exec --no-startup-id "flameshot gui -p ~/Pictures/Screenshots/"
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
