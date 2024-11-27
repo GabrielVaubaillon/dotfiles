@@ -1,7 +1,8 @@
 alias kb='setxkbmap -model pc105 -layout ie,fr -option grp:alt_shift_toggle -option caps:swapescape'
 alias vim='nvim'
 alias nv='nvim'
-alias nvimd='nvim --noplugin -u NONE' # launch nvim without any plugin or config (nvim debug)
+alias nvu='nvim --noplugin -u NONE' # launch nvim without any plugin or config
+alias nvd='nvim -d'
 
 alias cd..='cd ..'
 
