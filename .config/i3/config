@@ -50,7 +50,6 @@ workspace_layout default
 ##############################
 
 #border indicator on windows:
-new_window pixel 1
 default_border pixel 1
 default_floating_border pixel 1
 
@@ -149,6 +148,7 @@ bindsym $mod+r mode "resize"
 workspace_auto_back_and_forth no
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+Ctrl+b move container to workspace back_and_forth
 
 ######################################
 # keybindings for different actions: #
