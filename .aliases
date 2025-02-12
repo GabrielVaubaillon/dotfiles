@@ -24,6 +24,7 @@ alias rm='rm -i'
 
 # git
 alias gs='git status'
+alias gf='git fetch'
 # alias ga='git add'
 # alias gp='git push'
 # alias gpo='git push origin'
