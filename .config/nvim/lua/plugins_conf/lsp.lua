@@ -41,10 +41,34 @@ require('lspconfig').lua_ls.setup {
   }
 }
 
+------------------------------------------
+
+vim.diagnostic.config({
+  severity_sort = true,
+  virtual_text = {
+    source = "if_many", -- Or "if_many"
+    --prefix = '●', -- Could be '■', '▎', 'x'
+  },
+  float = {
+    source = true, -- Or "if_many"
+  },
+})
+
+-- LSP keymaps cheatsheet
+-- K - Show info on hover
+-- ]d and [d to move to next/previous diagnostic
+-- <C-X><C-O> for completion (omni mode)
+-- <C-]> go to tag
 -- LSP keymaps
+vim.keymap.set('n', 'ds', vim.diagnostic.open_float)
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end)
-vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
-vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
+vim.keymap.set('n', 'grn', vim.lsp.buf.rename)
+vim.keymap.set('n', 'gra', vim.lsp.buf.code_action)
+vim.keymap.set('n', 'grr', vim.lsp.buf.references)
+vim.keymap.set('n', 'gri', vim.lsp.buf.implementation)
+vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol)
+vim.keymap.set('n', '<C-s>', vim.lsp.buf.signature_help)
+
+-- Format is done in conform:
+-- vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end)
