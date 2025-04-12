@@ -86,7 +86,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Autocompletion options
-vim.opt.completeopt = { 'menuone', 'preview', 'noselect' }
+vim.opt.completeopt = { 'menuone', 'preview' }
 
 -- KEYMAPS
 ----------
