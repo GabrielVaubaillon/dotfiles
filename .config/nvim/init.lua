@@ -58,10 +58,6 @@ vim.opt.wrap = false
 -- show character limit
 vim.opt.colorcolumn = '100'
 
--- better splitting
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
 -- View substitution live
 vim.opt.inccommand = 'split'
 
