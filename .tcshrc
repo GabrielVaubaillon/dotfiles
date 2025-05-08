@@ -90,7 +90,9 @@ alias cdg 'cd `$HOME/scripts/fzf_bookmarked_dirs.tcsh \!*`'
 
 # PROMPT
 # ------
-set prompt = "╭─%B[tcsh][%j] %b%n@%M%B %~/\n%b╰─%B▶%b "
+set green = "%{\033[1;32m%}"
+set blue = "%{\033[1;34m%}"
+set prompt = "╭─%B[tcsh][%j] ${green}%n@%M ${blue}%~/\n%b╰─%B▶%b "
 
 # ALIASES
 # -------
