@@ -2,9 +2,19 @@
 -- by Gabriel Vaubaillon
 
 -- I try to have as much as my config from native
--- vim-nvim features. This file should be useable
--- without needing to install any plugin.
--- comment the last line to avoid plugins
+-- vim-nvim features. This file should be easy to modify
+-- to work without any plugin.
+-- check vanilla keyword in comments for no-plugin setup
+-- comment the prose line if cannot download spellings
+
+-- TODO
+--  - netrw
+--  - experiment with and without line numbers
+--  - marks in sign colum
+--  - status line theme. fix not visible enough
+--  - pylint/ruff/mypy in quickfix window. NO PLUGIN
+--  - check sidescrolloff
+--  - custom ruler for ^G ?
 
 -- OPTIONS
 ----------
@@ -12,11 +22,17 @@
 -- Use nvim colors
 vim.opt.termguicolors = true
 
+-- status line -- uncomment for vanilla
+-- vim.opt.statusline = "%h %<%.20f%m%r%=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
+
+-- Show mode - may be set to false with some status lines
+vim.opt.showmode = true
+
 -- Line numbers, relative line number
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- Always insert signcolumn (git + - ~ column)
+-- Always insert signcolumn -- comment for vanilla
 vim.opt.signcolumn = 'yes:1'
 
 -- decrease update time to 200ms
@@ -65,9 +81,6 @@ vim.opt.inccommand = 'split'
 
 -- Show current line
 vim.opt.cursorline = true
-
--- Don't show mode (already in my status bar)
-vim.opt.showmode = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
@@ -143,7 +156,7 @@ vim.keymap.set('n', '<leader>l', ':set list!<Enter>')
 vim.keymap.set('n', '<leader>n', ':set nu! rnu!<Enter>')
 
 -- quickfix
-vim.keymap.set('n', '<leader>q', ':copen<Enter>')  -- try ':botright copen' if issues
+vim.keymap.set('n', '<leader>q', ':copen<Enter>') -- try ':botright copen' if issues
 vim.keymap.set('n', '<leader>Q', ':cclose<Enter>')
 vim.keymap.set('n', ']q', ':cnext<Enter>zz')
 vim.keymap.set('n', '[q', ':cprevious<Enter>zz')
@@ -203,5 +216,5 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 -- Spell checking and not code specific config
 require("prose")
 
--- Load all plugins
+-- Load all plugins -- comment for vanilla
 require("plugins")
