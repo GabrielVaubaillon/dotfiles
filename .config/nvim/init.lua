@@ -29,8 +29,8 @@ vim.opt.termguicolors = true
 vim.opt.showmode = true
 
 -- Line numbers, relative line number
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = false
+vim.opt.relativenumber = false
 
 -- Always insert signcolumn -- comment for vanilla
 vim.opt.signcolumn = 'yes:1'
