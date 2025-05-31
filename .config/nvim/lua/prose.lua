@@ -17,4 +17,4 @@ vim.opt.spellsuggest = { 'best', 5 }
 -- })
 
 -- toggle spell checking
-vim.keymap.set('n', '<leader>s', ':set spell!<Enter>')
+vim.keymap.set('n', '<leader>sp', ':set spell!<Enter>')

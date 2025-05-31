@@ -148,6 +148,18 @@ vim.keymap.set('n', '<leader>l', ':set list!<Enter>')
 -- toggle line numbers
 vim.keymap.set('n', '<leader>n', ':set nu! rnu!<Enter>')
 
+-- quickfix next-previous
+vim.keymap.set('n', ']q', ':cnext<Enter>zz')
+vim.keymap.set('n', '[q', ':cprevious<Enter>zz')
+
+-- todo and fixme in quickfix
+-- TODO: decide if want copen
+vim.keymap.set('n', '<leader>tt', ':vimgrep /\\CTODO\\|FIXME/ %<Enter>')
+vim.keymap.set('n', '<leader>ta', ':vimgrep /\\CTODO\\|FIXME/ **<Enter>')
+
+-- search in project
+vim.keymap.set('n', '<leader>sf', ':vimgrep // **/*<left><left><left><left><left><left>')
+
 -- AUTOCOMMANDS
 ---------------
 
