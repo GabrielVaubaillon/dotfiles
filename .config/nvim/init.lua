@@ -142,7 +142,9 @@ vim.keymap.set('n', '<leader>l', ':set list!<Enter>')
 -- toggle line numbers
 vim.keymap.set('n', '<leader>n', ':set nu! rnu!<Enter>')
 
--- quickfix next-previous
+-- quickfix
+vim.keymap.set('n', '<leader>q', ':copen<Enter>')  -- try ':botright copen' if issues
+vim.keymap.set('n', '<leader>Q', ':cclose<Enter>')
 vim.keymap.set('n', ']q', ':cnext<Enter>zz')
 vim.keymap.set('n', '[q', ':cprevious<Enter>zz')
 
