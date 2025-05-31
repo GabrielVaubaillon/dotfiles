@@ -1,8 +1,10 @@
 -- NVIM config
 -- by Gabriel Vaubaillon
 
--- This file is manly the vanilla config, for coding
--- others files contain plugins config and mappings
+-- I try to have as much as my config from native
+-- vim-nvim features. This file should be useable
+-- without needing to install any plugin.
+-- comment the last line to avoid plugins
 
 -- OPTIONS
 ----------
