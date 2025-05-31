@@ -23,7 +23,11 @@
 vim.opt.termguicolors = true
 
 -- status line -- uncomment for vanilla
--- vim.opt.statusline = "%h %<%.20f%m%r%=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
+-- vim.opt.statusline = "%h %<%.20f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
+-- FIXME: Doesn't work properly for inactive
+-- vim.cmd.hi "User1 gui=bold,nocombine guifg=#181826 guibg=#89b4fb" -- for status line filename
+-- vim.cmd.hi "User2 gui=nocombine guifg=#89b4fb guibg=#313245" -- for status line line/column
+-- vim.opt.statusline = "%1*%h %<%.20f%m%r %0*%=%(%y[%{&fenc==''?&enc:&fenc}] %2* %l:%c %0*%)"
 
 -- Show mode - may be set to false with some status lines
 vim.opt.showmode = true
