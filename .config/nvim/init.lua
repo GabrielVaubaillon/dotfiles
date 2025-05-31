@@ -4,8 +4,11 @@
 -- I try to have as much as my config from native
 -- vim-nvim features. This file should be easy to modify
 -- to work without any plugin.
--- check vanilla keyword in comments for no-plugin setup
--- comment the prose line if cannot download spellings
+
+-- Switches to control config
+local activate_plugins = false
+local activate_spelling = true
+local smartphone_config = false
 
 -- TODO
 --  - netrw
@@ -13,7 +16,6 @@
 --  - status line theme. fix not visible enough with catpuccin
 --  - check sidescrolloff
 --  - custom ruler for ^G ?
---  - add easy var for switching vanilla/plugins
 
 -- OPTIONS
 ----------
@@ -21,23 +23,26 @@
 -- Use nvim colors
 vim.opt.termguicolors = true
 
--- status line -- uncomment for vanilla
--- vim.opt.statusline = "%h %<%.20f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
--- FIXME: Doesn't work properly for inactive
--- vim.cmd.hi "User1 gui=bold,nocombine guifg=#181826 guibg=#89b4fb" -- for status line filename
--- vim.cmd.hi "User2 gui=nocombine guifg=#89b4fb guibg=#313245" -- for status line line/column
--- :highlight link User1 StatusLineStyle
--- vim.opt.statusline = "%1*%h %<%.20f%m%r %0*%=%(%y[%{&fenc==''?&enc:&fenc}] %2* %l:%c %0*%)"
-
 -- Show mode - may be set to false with some status lines
 vim.opt.showmode = true
 
 -- Line numbers, relative line number
-vim.opt.number = false
-vim.opt.relativenumber = false
+if smartphone_config then
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+else
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+end
 
--- Always insert signcolumn -- comment for vanilla
-vim.opt.signcolumn = 'yes:1'
+-- Sign column
+if smartphone_config or not activate_plugins then
+    -- Only show if needed
+    vim.opt.signcolumn = 'auto'
+else
+    -- Always insert signcolumn
+    vim.opt.signcolumn = 'yes:1'
+end
 
 -- decrease update time to 200ms
 vim.opt.updatetime = 50
@@ -227,8 +232,26 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
--- Spell checking and not code specific config
-require("prose")
+-- THEME
+--------
+if not activate_plugins then
+    vim.opt.statusline = "%h %<%.20f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
+    -- FIXME: Doesn't work properly for inactive
+    -- vim.cmd.hi "User1 gui=bold,nocombine guifg=#181826 guibg=#89b4fb" -- for status line filename
+    -- vim.cmd.hi "User2 gui=nocombine guifg=#89b4fb guibg=#313245" -- for status line line/column
+    -- :highlight link User1 StatusLineStyle
+    -- vim.opt.statusline = "%1*%h %<%.20f%m%r %0*%=%(%y[%{&fenc==''?&enc:&fenc}] %2* %l:%c %0*%)"
+end
 
--- Load all plugins -- comment for vanilla
-require("plugins")
+-- EXTERNAL
+-----------
+-- Spell checking and "not code" specific config
+if activate_spelling then
+    require("prose")
+end
+
+-- Load all plugins
+if activate_plugins then
+    require("plugins")
+end
+
