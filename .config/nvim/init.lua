@@ -11,7 +11,6 @@ local activate_spelling = true
 local smartphone_config = false
 
 -- TODO
---  - netrw
 --  - marks in sign colum
 --  - status line theme. fix not visible enough with catpuccin
 --  - custom ruler for ^G ?
@@ -117,6 +116,10 @@ vim.opt.completeopt = { 'menuone', 'preview' }
 vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60"
 -- vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60,algorithm:histogram"
 -- vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60,algorithm:histogram,indent-heuristic"
+
+-- netrw
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 0 -- (0:thin, 1:long, 2:wide, 3:tree)
 
 -- Compilers options (:make)
 vim.g.pylint_makeprg_params = '--max-line-length 100 --ignore ".venv"'
