@@ -97,6 +97,9 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- do not search some files
+vim.opt.wildignore = "*/__pycache__/*,*/venv/*,*/.venv/*"
+
 -- When splitting, keep the old window left (vertical), up (horizontal)
 vim.opt.splitright = true
 vim.opt.splitbelow = true
