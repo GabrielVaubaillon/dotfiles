@@ -99,7 +99,7 @@ vim.keymap.set('n', '<Space>', '<NOP>')
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Keep the buffer centered
+-- Keep the buffer centered when jumping around
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '{', '{zz')
@@ -113,12 +113,6 @@ vim.keymap.set('n', '*', '*zz')
 vim.keymap.set('n', '#', '#zz')
 vim.keymap.set('n', '[c', '[czz')
 vim.keymap.set('n', ']c', ']czz')
-
--- Move between windows without <C-W>
-vim.keymap.set('n', '<C-h>', '<C-W>h')
-vim.keymap.set('n', '<C-j>', '<C-W>j')
-vim.keymap.set('n', '<C-k>', '<C-W>k')
-vim.keymap.set('n', '<C-l>', '<C-W>l')
 
 -- Move selected text up/down with Alt+{jk}
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
