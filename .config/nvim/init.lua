@@ -9,12 +9,11 @@
 
 -- TODO
 --  - netrw
---  - experiment with and without line numbers
 --  - marks in sign colum
---  - status line theme. fix not visible enough
---  - pylint/ruff/mypy in quickfix window. NO PLUGIN
+--  - status line theme. fix not visible enough with catpuccin
 --  - check sidescrolloff
 --  - custom ruler for ^G ?
+--  - add easy var for switching vanilla/plugins
 
 -- OPTIONS
 ----------
@@ -112,6 +111,9 @@ vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60"
 -- vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60,algorithm:histogram"
 -- vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60,algorithm:histogram,indent-heuristic"
 
+-- Compilers options (:make)
+vim.g.pylint_makeprg_params = '--max-line-length 100 --ignore ".venv"'
+
 -- KEYMAPS
 ----------
 
@@ -162,6 +164,10 @@ vim.keymap.set('n', '<leader>l', ':set list!<Enter>')
 
 -- toggle line numbers
 vim.keymap.set('n', '<leader>n', ':set nu! rnu!<Enter>')
+
+-- make
+vim.keymap.set('n', '<leader>mf', ':make %<Enter>')
+vim.keymap.set('n', '<leader>mp', ':make .<Enter>')
 
 -- quickfix
 vim.keymap.set('n', '<leader>q', ':copen<Enter>') -- try ':botright copen' if issues
