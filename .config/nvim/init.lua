@@ -86,6 +86,11 @@ vim.opt.splitbelow = true
 -- Autocompletion options
 vim.opt.completeopt = { 'menuone', 'preview' }
 
+-- diff options
+vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60"
+-- vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60,algorithm:histogram"
+-- vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60,algorithm:histogram,indent-heuristic"
+
 -- KEYMAPS
 ----------
 
