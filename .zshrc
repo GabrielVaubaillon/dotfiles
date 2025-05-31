@@ -98,6 +98,9 @@ setopt menu_complete
 # Include hidden files in autocomplete
 _comp_options+=(globdots)
 
+# Shift-Tab goes backward
+bindkey "^[[Z" reverse-menu-complete
+
 # FILESYSTEM NAVIGATION
 # ---------------------
 
