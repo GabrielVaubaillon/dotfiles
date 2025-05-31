@@ -241,6 +241,8 @@ if not activate_plugins then
     -- vim.cmd.hi "User2 gui=nocombine guifg=#89b4fb guibg=#313245" -- for status line line/column
     -- :highlight link User1 StatusLineStyle
     -- vim.opt.statusline = "%1*%h %<%.20f%m%r %0*%=%(%y[%{&fenc==''?&enc:&fenc}] %2* %l:%c %0*%)"
+    vim.opt.background = "dark"
+    vim.cmd.colorscheme "catppuccin_mocha"
 end
 
 -- EXTERNAL
