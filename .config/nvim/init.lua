@@ -14,7 +14,6 @@ local smartphone_config = false
 --  - netrw
 --  - marks in sign colum
 --  - status line theme. fix not visible enough with catpuccin
---  - check sidescrolloff
 --  - custom ruler for ^G ?
 
 -- OPTIONS
@@ -93,6 +92,9 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
+
+-- Minimal number of screen columns when moving on lines bigger than screen
+vim.opt.sidescrolloff = 5
 
 -- jump to match immediately when searching
 vim.opt.incsearch = true
