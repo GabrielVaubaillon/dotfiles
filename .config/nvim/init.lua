@@ -227,18 +227,20 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
--- Automatically delete trailing space at save
-vim.api.nvim_create_autocmd('BufWritePre', {
-    group = vim.api.nvim_create_augroup("delete_trailing_space", { clear = true }),
-    pattern = "*",
-    callback = function()
-        -- Save cursor position to restore later
-        local curpos = vim.api.nvim_win_get_cursor(0)
-        -- Search and replace trailing whitespaces
-        vim.cmd([[keeppatterns %s/\s\+$//e]])
-        vim.api.nvim_win_set_cursor(0, curpos)
-    end,
-})
+if config_mode ~= "remote" then
+    -- Automatically delete trailing space at save
+    vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup("delete_trailing_space", { clear = true }),
+        pattern = "*",
+        callback = function()
+            -- Save cursor position to restore later
+            local curpos = vim.api.nvim_win_get_cursor(0)
+            -- Search and replace trailing whitespaces
+            vim.cmd([[keeppatterns %s/\s\+$//e]])
+            vim.api.nvim_win_set_cursor(0, curpos)
+        end,
+    })
+end
 
 -- THEME
 --------
