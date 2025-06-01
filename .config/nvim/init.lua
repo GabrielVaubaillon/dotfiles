@@ -5,15 +5,14 @@
 -- vim-nvim features. This file should be easy to modify
 -- to work without any plugin.
 
--- Switches to control config
-local activate_plugins = true
-local activate_spelling = true
-local smartphone_config = false
+-- Config mode ("main", "remote", "smartphone")
+local config_mode = "main"
+-- remote: no plugins, no downloading of spelling dictionaries
+-- smartphone: maximize horizontal space (no line numbers, signcolumn only show when needed)
 
 -- TODO
 --  - marks in sign colum
 --  - status line theme. fix not visible enough with catpuccin
---  - custom ruler for ^G ?
 
 -- OPTIONS
 ----------
@@ -25,7 +24,7 @@ vim.opt.termguicolors = true
 vim.opt.showmode = true
 
 -- Line numbers, relative line number
-if smartphone_config then
+if config_mode == "smartphone" then
     vim.opt.number = false
     vim.opt.relativenumber = false
 else
@@ -34,7 +33,7 @@ else
 end
 
 -- Sign column
-if smartphone_config or not activate_plugins then
+if config_mode == "remote" or config_mode == "smartphone" then
     -- Only show if needed
     vim.opt.signcolumn = 'auto'
 else
@@ -239,7 +238,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 
 -- THEME
 --------
-if not activate_plugins then
+if config_mode == "remote" then
     vim.opt.statusline = "%h %<%.20f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
     -- FIXME: Doesn't work properly for inactive
     -- vim.cmd.hi "User1 gui=bold,nocombine guifg=#181826 guibg=#89b4fb" -- for status line filename
@@ -253,11 +252,11 @@ end
 -- EXTERNAL
 -----------
 -- Spell checking and "not code" specific config
-if activate_spelling then
+if config_mode ~= "remote" then
     require("prose")
 end
 
 -- Load all plugins
-if activate_plugins then
+if config_mode ~= "remote" then
     require("plugins")
 end
