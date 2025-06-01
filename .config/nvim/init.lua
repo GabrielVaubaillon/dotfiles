@@ -161,6 +161,10 @@ vim.keymap.set({ 'v', 'n' }, '<leader>p', '"+p')
 vim.keymap.set({ 'v', 'n' }, '<leader>y', '"+y')
 vim.keymap.set('n', '<leader>P', '"+P') -- (uppercase)
 
+-- Duplicate selection and comment out the first instance.
+-- vim.keymap.set("n", "gcc", "yygcc", { remap = true })
+vim.keymap.set("n", "ycc", "yygccp", { remap = true })
+
 -- Activate Diff quickly
 vim.keymap.set('n', '<leader>dt', ':diffthis<Enter>')
 vim.keymap.set('n', '<leader>do', ':diffoff<Enter>')
