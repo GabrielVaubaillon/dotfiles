@@ -1,4 +1,11 @@
+# my functions
+alias g="go_bookmarked"
+alias d="go_history"
+alias p="go_parents"
+
 alias kb='setxkbmap -model pc105 -layout ie,fr -option grp:alt_shift_toggle -option caps:swapescape'
+
+# Editor
 alias vim='nvim'
 alias nv='nvim'
 alias nvu='nvim --noplugin -u NONE' # launch nvim without any plugin or config
@@ -6,7 +13,7 @@ alias nvd='nvim -d'
 
 alias cd..='cd ..'
 
-# ls
+# typing is tiring
 alias ls='ls --color=auto'
 alias l='ls -lh'
 alias ll='ls -lh'
@@ -15,12 +22,12 @@ alias lla='ls -alh'
 alias lal='ls -alh'
 alias tree="tree -C -a -I '.git'"
 
-alias grep='grep --color'
 
-# need force to overwrite
+# default optiosn
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+alias grep='grep --color'
 
 # git
 alias gs='git status'

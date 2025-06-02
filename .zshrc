@@ -118,22 +118,15 @@ setopt pushd_to_home
 # Bookmarks for directories, with FZF
 DIR_BOOKMARKS="$HOME/.dir_bookmarks"
 alias bkm="pwd >> $DIR_BOOKMARKS && sort --unique --output $DIR_BOOKMARKS $DIR_BOOKMARKS"
-cdg() {
+go_bookmarked() {
     local dest
     if [[ $# > 1 ]]; then
-        echo "ERROR: too many arguments. $# given, expecting 0 or 1.\n---"
-        echo "Navigate to a bookmarked directory with fzf.\nusage: cdg [pattern]"
         return 1
     fi
-    if [[ $# == 1 && ( $1 == "help" || $1 == "--help" || $1 == "-h" ) ]]; then
-        echo "Navigate to a bookmarked directory with fzf.\nusage: cdg [pattern]"
-        echo "Bookmarks file: $DIR_BOOKMARKS"
-        return 0
-    fi
     if [[ $# == 0 ]]; then
-        dest=$(fzf < $DIR_BOOKMARKS)
+        dest=$(fzf --border --layout reverse --height 40% < $DIR_BOOKMARKS)
     else
-        dest=$(fzf --select-1 --query $1 < $DIR_BOOKMARKS)
+        dest=$(fzf --border --layout reverse --height 40% --select-1 --query $1 < $DIR_BOOKMARKS)
     fi
     if [[ ! -z $dest ]]; then
         cd $dest
@@ -142,11 +135,42 @@ cdg() {
     return 1
 }
 
-# d will display the directory stack,
-# you can then move in the stack using 1 to 9 as aliases
-local max_alias_stack=9
-alias d="dirs -v | tail -n +2 | head -n $max_alias_stack"
-for index ({1..$max_alias_stack}) alias "$index"="cd +${index}"; unset index;
+go_history() {
+    local dest
+    if [[ $# > 1 ]]; then
+        return 1
+    fi
+    if [[ $# == 0 ]]; then
+        dest=$(dirs -lp | tail -n +2 | fzf --border --layout reverse --height 40% --no-sort)
+    else
+        dest=$(dirs -lp | tail -n +2 | fzf --border --layout reverse --height 40% --no-sort --select-1 --query $1 )
+    fi
+    if [[ ! -z $dest ]]; then
+        cd $dest
+        return 0
+    fi
+    return 1
+}
+
+go_parents() {
+    # This simple oneliner allows to do it with exact match
+    # cdu () { cd "${PWD%/$1/*}/$1"; }
+    if [[ $# > 1 ]]; then
+        return 1
+    fi
+    local dest
+    local cwd=$(pwd)
+    if [[ $# == 0 ]]; then
+        dest=$($HOME/scripts/parents.py $cwd | fzf --border --layout reverse --height 40%)
+    else
+        dest=$($HOME/scripts/parents.py $cwd | fzf --filter $1 | head -n 1)
+    fi
+    if [[ -z $dest ]]; then
+        return 1
+    fi
+    cd $dest
+    return 0
+}
 
 # k : better ls -l, with git status of file & directories
 local k_src="$zsh_config/zsh-k/k.sh"
