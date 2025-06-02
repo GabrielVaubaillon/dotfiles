@@ -109,7 +109,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Autocompletion options
-vim.opt.completeopt = { 'menuone', 'preview' }
+vim.opt.completeopt = { 'menuone', 'preview', 'noselect' }
 
 -- diff options
 vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60"
