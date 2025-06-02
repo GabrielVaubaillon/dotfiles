@@ -50,11 +50,11 @@ workspace_layout default
 ##############################
 
 #border indicator on windows:
-default_border pixel 1
-default_floating_border pixel 1
+default_border pixel 2
+default_floating_border pixel 2
 
 # To change border on the fly
-bindsym $mod+y border pixel 1
+bindsym $mod+y border pixel 2
 bindsym $mod+n border normal
 
 # thin borders
@@ -509,13 +509,14 @@ set $base #1e1e2e
 set $mantle #181825
 set $crust #11111b
 
+set $transp       #00000000
 # target                 title     bg    text   indicator  border
 client.focused           $lavender $base $text  $rosewater $lavender
-client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
-client.unfocused         $overlay0 $base $text  $rosewater $overlay0
-client.urgent            $peach    $base $peach $overlay0  $peach
-client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
-client.background        $base
+client.focused_inactive  $overlay0 $base $text  $rosewater $transp
+client.unfocused         $overlay0 $base $text  $rosewater $transp
+client.urgent            $peach    $base $peach $overlay0  $transp
+# client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $transp
 
 
 ############################################
