@@ -245,7 +245,7 @@ end
 -- THEME
 --------
 if config_mode == "remote" then
-    vim.opt.statusline = "%h %<%.20f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
+    vim.opt.statusline = "%h %<%f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
     -- FIXME: Doesn't work properly for inactive
     -- vim.cmd.hi "User1 gui=bold,nocombine guifg=#181826 guibg=#89b4fb" -- for status line filename
     -- vim.cmd.hi "User2 gui=nocombine guifg=#89b4fb guibg=#313245" -- for status line line/column
