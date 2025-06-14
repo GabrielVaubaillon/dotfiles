@@ -196,13 +196,12 @@ function () {
         source $git_prompt_src
     fi
 
-    local user_host="%B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m%{$reset_color%}%b"
-    local current_dir="%B%{$fg[blue]%}%~/%{$reset_color%}%b"
+    local current_dir="%B%{$fg[blue]%}%//%{$reset_color%}%b"
     local return_code="%B%(?..%{$fg[red]%}%? ↵)%{$reset_color%}%b"
     local current_jobs="%B%(1j.%{$fg[blue]%}(%j jobs).)%{$reset_color%}%b"
 
     NEWLINE=$'\n' # Avoid issue with redraw
-    PROMPT="╭─${user_host} ${current_dir} \$(gitprompt)${NEWLINE}╰─%B▶%b "
+    PROMPT="╭─${current_dir} \$(gitprompt)${NEWLINE}╰─%B▶%b "
     RPROMPT="${return_code} ${current_jobs}"
 }
 
