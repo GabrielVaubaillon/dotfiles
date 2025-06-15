@@ -5,6 +5,8 @@ typeset -U path PATH
 path=($HOME/bin $HOME/scripts $path)
 export PATH
 
+export MANPAGER='nvim +Man!'
+
 # Create the config directory if doesn't exist
 local zsh_config="$HOME/.config/zsh"
 if [ ! -d $zsh_config ]; then
@@ -197,8 +199,8 @@ function () {
     fi
 
     local current_dir="%B%{$fg[blue]%}%//%{$reset_color%}%b"
-    local return_code="%B%(?..%{$fg[red]%}%? ↵)%{$reset_color%}%b"
-    local current_jobs="%B%(1j.%{$fg[blue]%}(%j jobs).)%{$reset_color%}%b"
+    local return_code="%B%(?..%{$fg[red]%}[%?])%{$reset_color%}%b"
+    local current_jobs="%B%(1j.%{$fg[blue]%}[%j].)%{$reset_color%}%b"
 
     NEWLINE=$'\n' # Avoid issue with redraw
     PROMPT="╭─${current_dir} \$(gitprompt)${NEWLINE}╰─%B▶%b "
