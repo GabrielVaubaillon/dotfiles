@@ -1,0 +1,48 @@
+#!/bin/python
+
+import subprocess
+import sys
+
+status = subprocess.run(
+    ["nmcli", "connection", "show", "--active"],
+    check=True,
+    capture_output=True,
+    text=True,
+)
+
+# Example of the output of nmcli connection show --active
+# NAME              UUID                                  TYPE      DEVICE
+# vpn_name          badbad02-beef-4000-1234-56789abcdef0  vpn       wlan0
+# wifi name wooo    badbad02-beef-4000-1234-56789abcdef0  wifi      wlan0
+# lo                badbad02-beef-4000-1234-56789abcdef0  loopback  lo
+# tun0              badbad02-beef-4000-1234-56789abcdef0  tun       tun0
+
+if status.returncode:
+    print("none")
+    sys.exit(1)
+
+# find column sizes and names
+lines: list[str] = status.stdout.split("\n")
+end_name: int = lines[0].index("UUID")
+start_type: int = lines[0].index("TYPE")
+end_type: int = lines[0].index("DEVICE")
+
+str_: str = ""
+vpn: str = ""
+for line in lines[1:-1]:  # do not check header and last empty line
+    type_ = line[start_type:end_type].strip()
+    if type_ in ("loopback", "tun"):
+        continue
+
+    if type_ == "vpn":
+        vpn = f" | vpn: {line[0:end_name].strip()}"
+    elif type_ == "wifi":
+        str_ = line[0:end_name].strip()
+    elif type_ == "ethernet":
+        str_ = "ethernet"
+    else:
+        str_ = f"{line[0:end_name].strip()} ({type_})"
+
+print(str_ + vpn)
+
+sys.exit(0)
