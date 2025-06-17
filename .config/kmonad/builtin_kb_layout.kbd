@@ -1,0 +1,73 @@
+;; TODO:
+;; - french keys (à â æ ç é è ê ë î ï ô œ ù û ü ÿ)
+;; - uppercase french keys (À Â Æ Ç É È Ê Ë Î Ï Ô Œ Ù Û Ü Ÿ)
+
+(defcfg
+  ;; KMonad catches input events and tries to match them to various handlers. If
+  ;; it cannot match an event to any handler (for example, if it isn't included
+  ;; in the corresponding `defsrc` block, or if it is, but the current keymap
+  ;; does not map any buttons to it), then the event gets quietly ignored. If
+  ;; `fallthrough` is set to `true`, any unhandled events simply get reemitted.
+  ;;
+  ;; In more practical terms, this allows you to only specify the keys that
+  ;; you want to overwrite in your `defsrc' block.
+  fallthrough true
+
+  ;; If this is set to `false`, any action that runs a shell-command will simply
+  ;; log to `stdout` without ever running (log-level info)
+  allow-cmd false
+
+  ;; Implicit-around: `around` (default), `around-only`, `around-when-alone` or `disabled`
+  ;;
+  ;; An implicit around may be in `A` or `_` but also in modded buttons (`S-a`).
+  ;; This changes how implicit arounds are handled, for more details see `around`
+  ;; below.
+  ;; `disabled` results in an error when implicit around is used.
+  implicit-around around
+
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  output (uinput-sink "builtin_kb_kmonad_output")
+  ;; output (uinput-sink "My KMonad output" "sleep 1 && setxkbmap -option compose:ralt")
+  ;; cmp-seq ralt    ;; Set the compose key to `RightAlt'
+  ;; cmp-seq-delay 5 ;; 5ms delay between each compose-key sequence press
+  ;; key-seq-delay 5 ;; 5ms delay between each outputted key event
+)
+
+(defsrc
+  caps
+)
+
+;; (defsrc
+;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+;;   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;;   tab  q    w    e    r    t    y    u    i    o    p    [    ]    ret
+;;   caps a    s    d    f    g    h    j    k    l    ;    '    #
+;;   lsft nubs z    x    c    v    b    n    m    ,    .    /    rsft
+;;   lctl lmet lalt           spc                 ralt rmet cmp  rctl left up down right
+;; )
+
+;; (defsrc
+;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+;;   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;;   tab  q    w    e    r    t    y    u    i    o    p    [    ]    ret
+;;   caps a    s    d    f    g    h    j    k    l    ;    '    #
+;;   lsft nubs z    x    c    v    b    n    m    ,    .    /    rsft
+;;   lctl lmet lalt           spc                 ralt rmet cmp  rctl left up down right
+;; )
+
+;; (deflayer shift
+;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+;;   ¬    !    "    £    $    %    ^    &    *    \(   \)   \_   bspc
+;;   tab  Q    W    E    R    T    Y    U    I    O    P    {    }    ret
+;;   caps A    S    D    F    G    H    J    K    L    :    @    ~
+;;   lsft |    Z    X    C    V    B    N    M    <    >    ?    rsft
+;;   lctl lmet lalt           spc                 ralt rmet cmp  rctl left up down right
+;; )
+
+(deflayer base
+  lctl
+)
+
+(defalias
+  ecr (tap-hold 150 esc lctrl)
+)

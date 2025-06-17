@@ -1,0 +1,13 @@
+[Unit]
+Description=kmonad
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/kmonad /home/gabriel/Desktop/keyboard_custom/builtin_kb_layout.kbd
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
