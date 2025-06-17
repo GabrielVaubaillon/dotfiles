@@ -275,6 +275,7 @@ bindsym XF86AudioPrev exec playerctl previous
 ## App shortcuts
 bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
+bindsym $mod+m exec --no-startup-id firefox --new-window https://mail.proton.me
 bindsym $mod+Shift+x exec --no-startup-id bitwarden-desktop
 bindsym $mod+x exec --no-startup-id thunar
 bindsym $mod+p exec --no-startup-id "flameshot full -p ~/Pictures/Screenshots/"
