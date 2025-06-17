@@ -3,6 +3,7 @@
 KBD=$(/usr/bin/xkblayout-state print '%s')
 echo $KBD
 if [[ $KBD == "gb" ]]; then
-    setxkbmap -model pc105 -layout 'ie,fr' -option 'grp:alt_shift_toggle' -option 'caps:swapescape'
+    # setxkbmap -model pc105 -layout 'ie,fr' -option 'grp:alt_shift_toggle' -option 'caps:swapescape'
+    setxkbmap -model pc105 -layout 'ie'
 fi
 
