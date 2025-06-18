@@ -284,9 +284,6 @@ bindsym $mod+Shift+s exec --no-startup-id "flameshot gui -p ~/Pictures/Screensho
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
 
-# bindsym $mod+z exec --no-startup-id "setxkbmap -model pc105 -layout 'ie,fr' -option 'grp:alt_shift_toggle' -option 'caps:swapescape'"
-bindsym $mod+z exec --no-startup-id "setxkbmap -model pc105 -layout 'ie'"
-
 ##########################################
 # configuration for workspace behaviour: #
 ##########################################
@@ -377,12 +374,6 @@ exec --no-startup-id dex --autostart --environment i3
 
 # num lock activated
 #exec --no-startup-id numlockx on
-
-# configure multiple keyboard layouts and hotkey to switch (Alt+CAPSLOCK in this example)
-# exec --no-startup-id setxkbmap -model pc105 -layout 'ie,fr' -option 'grp:alt_shift_toggle' -option 'caps:swapescape'
-# Now using kmonad
-# TODO: check if the following line is still relevant
-exec --no-startup-id setxkbmap -model pc105 -layout 'ie'
 
 # start conky:
 #exec_always --no-startup-id conky

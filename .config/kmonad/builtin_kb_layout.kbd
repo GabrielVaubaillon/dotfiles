@@ -67,7 +67,3 @@
 (deflayer base
   lctl
 )
-
-(defalias
-  ecr (tap-hold 150 esc lctrl)
-)
