@@ -31,7 +31,7 @@ bindkey "^[[1;5C" forward-word
 # MISC
 # ----
 
-WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
+WORDCHARS='*?._-[]~=&;!#$%^(){}<>'
 
 # No beep
 unsetopt  beep
