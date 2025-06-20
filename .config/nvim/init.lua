@@ -170,13 +170,13 @@ vim.keymap.set('n', '<leader>dt', ':diffthis<Enter>')
 vim.keymap.set('n', '<leader>do', ':diffoff<Enter>')
 
 -- toggle wrap
-vim.keymap.set('n', '<leader>w', ':set wrap!<Enter>')
+vim.keymap.set('n', '<leader>tw', ':set wrap!<Enter>')
 
 -- toggle whitespace
-vim.keymap.set('n', '<leader>l', ':set list!<Enter>')
+vim.keymap.set('n', '<leader>tl', ':set list!<Enter>')
 
 -- toggle line numbers
-vim.keymap.set('n', '<leader>n', ':set nu! rnu!<Enter>')
+vim.keymap.set('n', '<leader>tn', ':set nu! rnu!<Enter>')
 
 -- make
 vim.keymap.set('n', '<leader>mf', ':make %<Enter>')
@@ -189,12 +189,11 @@ vim.keymap.set('n', ']q', ':cnext<Enter>zz')
 vim.keymap.set('n', '[q', ':cprevious<Enter>zz')
 
 -- todo and fixme in quickfix
--- TODO: decide if want copen
-vim.keymap.set('n', '<leader>tt', ':vimgrep /\\CTODO\\|FIXME/ %<Enter>')
-vim.keymap.set('n', '<leader>ta', ':vimgrep /\\CTODO\\|FIXME/ **<Enter>')
+vim.keymap.set('n', '<leader>st', ':vimgrep /\\CTODO\\|FIXME/ %<Enter>')
+vim.keymap.set('n', '<leader>sa', ':vimgrep /\\CTODO\\|FIXME/ **<Enter>')
 
 -- search in project
-vim.keymap.set('n', '<leader>sf', ':vimgrep // **/*<left><left><left><left><left><left>')
+vim.keymap.set('n', '<teader>sf', ':vimgrep // **/*<left><left><left><left><left><left>')
 
 -- AUTOCOMMANDS
 ---------------
@@ -246,12 +245,8 @@ end
 --------
 if config_mode == "remote" then
     vim.opt.statusline = "%h %<%f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
-    -- FIXME: Doesn't work properly for inactive
-    -- vim.cmd.hi "User1 gui=bold,nocombine guifg=#181826 guibg=#89b4fb" -- for status line filename
-    -- vim.cmd.hi "User2 gui=nocombine guifg=#89b4fb guibg=#313245" -- for status line line/column
-    -- :highlight link User1 StatusLineStyle
-    -- vim.opt.statusline = "%1*%h %<%.20f%m%r %0*%=%(%y[%{&fenc==''?&enc:&fenc}] %2* %l:%c %0*%)"
     vim.opt.background = "dark"
+    -- update
     vim.cmd.colorscheme "catppuccin_mocha"
 end
 
