@@ -12,7 +12,6 @@ local config_mode = "main"
 
 -- TODO
 --  - marks in sign colum
---  - status line theme. fix not visible enough with catpuccin
 
 -- OPTIONS
 ----------
@@ -245,9 +244,8 @@ end
 --------
 if config_mode == "remote" then
     vim.opt.statusline = "%h %<%f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
+    vim.cmd.colorscheme "mocha_custom"
     vim.opt.background = "dark"
-    -- update
-    vim.cmd.colorscheme "catppuccin_mocha"
 end
 
 -- EXTERNAL
