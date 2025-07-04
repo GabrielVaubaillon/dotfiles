@@ -530,7 +530,9 @@ bar {
         font pango: Noto Sans Regular 10, FontAwesome 10
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
         position bottom
-        tray_padding 0
+        tray_padding 2
+        # padding top[px] right[px] bottom[px] left[px]
+        padding 0px 2px 0px 2px
 
         # When strip_workspace_numbers is set to yes,
         # any workspace that has a name of the form
