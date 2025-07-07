@@ -35,7 +35,7 @@ for line in lines[1:-1]:  # do not check header and last empty line
         continue
 
     if type_ == "vpn":
-        vpn = f" | vpn: {line[0:end_name].strip()}"
+        vpn = f" / vpn: {line[0:end_name].strip()}"
     elif type_ == "wifi":
         str_ = line[0:end_name].strip()
     elif type_ == "ethernet":

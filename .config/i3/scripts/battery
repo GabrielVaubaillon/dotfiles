@@ -1,0 +1,91 @@
+#!/usr/bin/env python3
+
+from subprocess import check_output
+
+# colors from catppuccin mocha
+# black
+color0 = "#45475a"
+color8 = "#585b70"
+# red
+color1 = "#f38ba8"
+color9 = "#f38ba8"
+# green
+color2 = "#a6e3a1"
+color10 = "#a6e3a1"
+# yellow
+color3 = "#f9e2af"
+color11 = "#f9e2af"
+# blue
+color4 = "#89b4fa"
+color12 = "#89b4fa"
+# magenta
+color5 = "#f5c2e7"
+color13 = "#f5c2e7"
+# cyan
+color6 = "#94e2d5"
+color14 = "#94e2d5"
+# white
+color7 = "#bac2de"
+color15 = "#a6adc8"
+
+status = check_output(["acpi"], universal_newlines=True)
+
+if not status:
+    text = f"<span color='{color1}'><span font='FontAwesome'>\uf00d \uf240</span></span>"
+    percentleft = 100
+    print(text)
+    exit(1)
+# if there is more than one battery in one laptop, the percentage left is
+# available for each battery separately, although state
+# for overall block is shown in the status of the first battery
+batteries = status.split("\n")
+state_batteries = []
+commasplitstatus_batteries = []
+percentleft_batteries = []
+for battery in batteries:
+    if battery != "":
+        state_batteries.append(battery.split(": ")[1].split(", ")[0])
+        commasplitstatus = battery.split(", ")
+        p = int(commasplitstatus[1].rstrip("%\n"))
+        if p > 0:
+            percentleft_batteries.append(p)
+        commasplitstatus_batteries.append(commasplitstatus)
+state = state_batteries[0]
+commasplitstatus = commasplitstatus_batteries[0]
+if percentleft_batteries:
+    percentleft = int(sum(percentleft_batteries) / len(percentleft_batteries))
+else:
+    percentleft = 0
+
+# stands for charging
+FA_LIGHTNING = "<span font='FontAwesome'>\uf0e7</span>"
+# stands for plugged in
+FA_PLUG = "<span font='FontAwesome'>\uf1e6</span>"
+# stands for using battery
+FA_BATTERY = "<span font='FontAwesome'>\uf240</span>"
+# stands for unknown status of battery
+FA_QUESTION = "<span font='FontAwesome'>\uf128</span>"
+
+if state == "Discharging":
+    logo = FA_BATTERY
+elif state == "Full":
+    logo = FA_PLUG
+elif state == "Unknown":
+    logo = FA_QUESTION + " " + FA_BATTERY
+else:
+    logo = FA_LIGHTNING + " " + FA_PLUG
+
+if percentleft < 15:
+    text = (
+        f'<span bgcolor="{color1}"><span color="{color0}">{logo} {percentleft}%</span></span>'
+    )
+elif percentleft < 25:
+    text = f'<span color="{color1}">{logo} {percentleft}%</span>'
+else:
+    text = f'<span color="{color7}">{logo} {percentleft}%</span>'
+
+print(text)
+
+if percentleft < 8:
+    # return code for urgent
+    exit(33)

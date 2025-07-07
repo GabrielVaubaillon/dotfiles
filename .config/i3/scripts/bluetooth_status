@@ -1,0 +1,31 @@
+#!/bin/python
+
+import subprocess
+import sys
+
+status = subprocess.run(
+    ["bluetoothctl", "devices", "Connected"],
+    check=True,
+    capture_output=True,
+    text=True,
+)
+
+# Device 88:88:88:88:88:88 device name
+
+if status.returncode:
+    print("none")
+    sys.exit(1)
+
+# find column sizes and names
+lines: list[str] = status.stdout.split("\n")
+connected_devices: list[str] = []
+for line in lines:
+    if line.startswith("Device "):
+        device: str = line.removeprefix("Device ")
+        # remove mac address (2 * 6) + (1 * 5) = 17
+        device = device[18:]
+        connected_devices.append(device)
+
+print(" / ".join(connected_devices))
+
+sys.exit(0)
