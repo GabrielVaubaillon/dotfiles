@@ -177,6 +177,10 @@ vim.keymap.set('n', '<leader>tl', ':set list!<Enter>')
 -- toggle line numbers
 vim.keymap.set('n', '<leader>tn', ':set nu! rnu!<Enter>')
 
+-- toggle line numbers
+vim.keymap.set('n', '<leader>cc', ':set cc+=53<Enter>')
+vim.keymap.set('n', '<leader>CC', ':set cc-=53<Enter>')
+
 -- make
 vim.keymap.set('n', '<leader>mf', ':make %<Enter>')
 vim.keymap.set('n', '<leader>mp', ':make .<Enter>')
