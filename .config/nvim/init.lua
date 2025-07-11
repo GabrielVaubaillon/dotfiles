@@ -196,7 +196,7 @@ vim.keymap.set('n', '<leader>st', ':vimgrep /\\CTODO\\|FIXME/ %<Enter>')
 vim.keymap.set('n', '<leader>sa', ':vimgrep /\\CTODO\\|FIXME/ **<Enter>')
 
 -- search in project
-vim.keymap.set('n', '<teader>sf', ':vimgrep // **/*<left><left><left><left><left><left>')
+vim.keymap.set('n', '<leader>sf', ':vimgrep // **/*<left><left><left><left><left><left>')
 
 -- AUTOCOMMANDS
 ---------------
