@@ -11,9 +11,9 @@ status = subprocess.run(
     text=True,
 )
 
+powerstate: None | str = None
 if not status.returncode:
     lines: list[str] = status.stdout.split("\n")
-    powerstate: None | str = None
     for line in lines:
         if line.strip().startswith("PowerState: "):
             powerstate = line.strip().removeprefix("PowerState: ")
@@ -47,6 +47,9 @@ for line in lines:
         device = device[18:]
         connected_devices.append(device)
 
-print(" / ".join(connected_devices))
+if not connected_devices and powerstate is not None:
+    print(powerstate)
+else:
+    print(" / ".join(connected_devices))
 
 sys.exit(0)
