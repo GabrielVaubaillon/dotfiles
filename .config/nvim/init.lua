@@ -154,6 +154,8 @@ vim.keymap.set('n', '<Leader>b', ":b#<Enter>")
 
 -- Easy move to buffers (show opened buffers when gb)
 vim.keymap.set('n', 'gb', ":ls<Enter>:b ")
+vim.keymap.set('n', ']b', ':bnext<Enter>')
+vim.keymap.set('n', '[b', ':bprevious<Enter>')
 
 -- System clipboard copy paste with leader
 vim.keymap.set({ 'v', 'n' }, '<leader>p', '"+p')
