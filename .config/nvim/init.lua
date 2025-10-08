@@ -166,6 +166,10 @@ vim.keymap.set('n', '<leader>P', '"+P') -- (uppercase)
 -- vim.keymap.set("n", "gcc", "yygcc", { remap = true })
 vim.keymap.set("n", "ycc", "yygccp", { remap = true })
 
+-- keep the flags when re-running substitute commands
+vim.keymap.set("n", "&", ":&&<Enter>")
+vim.keymap.set("x", "&", ":&&<Enter>")
+
 -- Activate Diff quickly
 vim.keymap.set('n', '<leader>dt', ':diffthis<Enter>')
 vim.keymap.set('n', '<leader>do', ':diffoff<Enter>')
