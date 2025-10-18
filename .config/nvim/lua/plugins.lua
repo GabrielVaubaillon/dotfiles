@@ -40,8 +40,6 @@ require("lazy").setup({
     ft = { "markdown" },
     build = function() vim.fn["mkdp#util#install"]() end,
   },
-  -- indent guides
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", }
 })
 
 -- plugins config
