@@ -50,11 +50,11 @@ workspace_layout default
 ##############################
 
 #border indicator on windows:
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 3
+default_floating_border pixel 3
 
 # To change border on the fly
-bindsym $mod+y border pixel 2
+bindsym $mod+y border pixel 3
 bindsym $mod+n border normal
 
 # thin borders
@@ -63,8 +63,8 @@ bindsym $mod+n border normal
 smart_borders on
 
 # Set inner/outer gaps
-gaps inner 5
-gaps outer -5
+gaps inner 0
+gaps outer 0
 
 smart_gaps on
 
