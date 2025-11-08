@@ -319,7 +319,8 @@ set $ws10 "10"
 #workspace $ws5 output HDMI-0
 
 # bind program to workspace and focus to them on startup:
-assign [class="thunderbird"] $ws5
+assign [class="Mail"] $ws5
+assign [class="org.mozilla.Thunderbird"] $ws5
 #assign [class="Xfce4-terminal"] $ws1
 #assign [class="(?i)firefox"] $ws2
 #assign [class="Thunar"] $ws3
