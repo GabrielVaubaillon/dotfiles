@@ -18,15 +18,13 @@ require("lazy").setup({
   -- better visual status line
   "nvim-lualine/lualine.nvim",
   -- better theming
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim",                 name = "catppuccin", priority = 1000 },
   -- syntax highlighting (and other sweet things around understanding syntax)
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   -- visual indications on git-modified files
   "lewis6991/gitsigns.nvim",
   -- access the nvim undotree, never lose work
   "mbbill/undotree",
-  -- Language Servers config
-  "neovim/nvim-lspconfig",
   -- Auto-format
   "stevearc/conform.nvim",
   -- Auto detect indent of current file
@@ -49,6 +47,5 @@ require("plugins_conf.treesitter")
 require("plugins_conf.comment")
 require("plugins_conf.gitsigns")
 require("plugins_conf.undotree")
-require("plugins_conf.lsp")
 require("plugins_conf.conform")
 require("plugins_conf.indent-o-matic")
