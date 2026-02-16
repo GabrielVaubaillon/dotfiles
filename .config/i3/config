@@ -184,6 +184,7 @@ bindsym F1 exec --no-startup-id ~/.config/i3/scripts/keyhint-2
 # Backlight control
 # NOTE: might need to install acpilight if xbacklight isn't working as is,
 #       and udev rule (see ~/.config/gabriel_custom/backlight.rules
+# TODO: check out brightnessctl
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -10
 bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xbacklight +1
@@ -515,9 +516,9 @@ set $crust #11111b
 set $transp       #00000000
 # target                 title     bg    text   indicator  border
 client.focused           $lavender $base $text  $rosewater $lavender
-client.focused_inactive  $overlay0 $base $text  $rosewater $transp
-client.unfocused         $overlay0 $base $text  $rosewater $transp
-client.urgent            $peach    $base $peach $overlay0  $transp
+client.focused_inactive  $overlay0 $base $text  $rosewater $base
+client.unfocused         $overlay0 $base $text  $rosewater $base
+client.urgent            $peach    $base $peach $overlay0  $base
 # client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $transp
 
