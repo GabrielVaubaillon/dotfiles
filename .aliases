@@ -6,7 +6,7 @@ alias p="go_parents"
 alias kb='setxkbmap -model pc105 -layout ie,fr -option grp:alt_shift_toggle -option caps:swapescape'
 
 # Editor
-alias vim='nvim'
+# alias vim='nvim'
 alias nv='nvim'
 alias nvu='nvim --noplugin -u NONE' # launch nvim without any plugin or config
 alias nvd='nvim -d'
