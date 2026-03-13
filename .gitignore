@@ -1,3 +1,4 @@
 .git
 .config/nvim/lazy-lock.json
 .config/cava/shaders
+.config/cava/themes
