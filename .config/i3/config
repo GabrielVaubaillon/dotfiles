@@ -30,9 +30,6 @@ font pango: Noto Sans Regular 10
 # set the mod key to the winkey:
 set $mod Mod4
 
-# keyboard reset
-bindsym $mod+g exec --no-startup-id 'setxkbmap -layout ie -option ctrl:nocaps'
-
 #####################
 # workspace layout: #
 #####################
@@ -165,6 +162,9 @@ bindsym $mod+q kill
 
 # exit-menu
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
+
+# keyboard reset
+bindsym $mod+g exec 'setxkbmap -layout ie -option ctrl:nocaps'
 
 # Lock the system
 # lock with a picture:
