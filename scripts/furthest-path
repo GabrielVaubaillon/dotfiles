@@ -1,0 +1,117 @@
+#!/bin/python
+
+import argparse
+import difflib
+import os
+import pathlib
+import sys
+
+def potential_typo_of(str_: str, compare_list: list[str], threshold: float = 0.8) -> str:
+    """match str_ against all strings from compare_list, return the best match
+
+    :param str_: string to compare
+    :param compare_list: reference strings
+    :param threshold: between 0.0 and 1.0, ignore strings with a match ratio under threshold
+    :returns: best matching string from compare_list, emptu string if no good match
+    """
+    if threshold < 0.0 or threshold > 1.0:
+        raise ValueError("threshold must be between 0.0 and 1.0")
+
+    typo: str = ""
+    best_ratio: float = threshold
+
+    for string in compare_list:
+        match_ratio: float = difflib.SequenceMatcher(
+            None, str_.casefold(), string.casefold()
+        ).ratio()
+        if match_ratio > best_ratio:
+            typo = string
+            best_ratio = match_ratio
+    return typo
+
+
+def furthest_accessible_path(path: pathlib.Path) -> tuple[pathlib.Path, bool]:
+    """try to read path, find furthest accessible element of path.
+
+    also print warnings for "don't exist" or "permission error"
+
+    :param path: path to try
+    :returns: - furthest accessible path,
+              - boolean flag True if furthest < full-path, False otherwise
+    """
+
+    flag: bool = False
+
+    try:
+        # remove file from path, to only compare directories
+        if path.is_file():
+            print(f"WARNING - not a directory: {path.name}", file=sys.stderr)
+    except PermissionError:
+        pass
+
+    missing_dir: str = ""
+    while True:
+        try:
+            path.stat()
+        except PermissionError:
+            flag = True
+        except FileNotFoundError:
+            flag = True
+            missing_dir = path.name
+        else:
+            break
+        path = path.parent
+
+    # missing one step when permission issue
+    try:
+        os.chdir(path)
+    except PermissionError:
+        print(
+            f"WARNING - permission error: {path.name}\nWARNING - group '{path.group()}'",
+            file=sys.stderr,
+        )
+        path = path.parent
+
+    if missing_dir:
+        print(f"WARNING - not found: {missing_dir}", file=sys.stderr)
+        dir_list: list[str] = [directory.name for directory in path.glob("*/")]
+        maybe: str = potential_typo_of(missing_dir, dir_list)
+        if maybe:
+            print(f"WARNING - did you mean '{maybe}'?", file=sys.stderr)
+    return path, flag
+
+def main() -> int:
+    """main starting point, when running the script
+
+    :returns: return code (int)
+    """
+    parser = argparse.ArgumentParser(
+        prog=os.path.basename(__file__),
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "path",
+        type=lambda p: pathlib.Path(p).absolute(),
+        help="print furthest accessible point in path"
+    )
+    args = parser.parse_args()
+
+    furthest_path: pathlib.Path
+    flag: bool
+    furthest_path, flag = furthest_accessible_path(args.path)
+
+    print(furthest_path.as_posix(), "/", sep="")
+
+    if flag:
+        return 1
+    return 0
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+

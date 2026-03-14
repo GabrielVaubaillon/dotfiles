@@ -1,26 +1,19 @@
 # Adding personal programs and scripts to PATH
 set path = ($HOME/bin $HOME/scripts $path)
 
-# Create the config directory if doesn't exist
-set tcsh_config = "$HOME/.config/tcsh"
-if (! -d $tcsh_config ) then
-    echo "Create TCSH config directory $tcsh_config"
-    mkdir -p $tcsh_config
-endif
-
 # KEYS
 # ----
 
 # Del
-bindkey "^[[3~" delete-char
+bindkey "^[[3~" delete-char # use CTRL-D
 
 # ^Del and ^Backspace
-bindkey "^[[3;5~" delete-word
-bindkey "^H" backward-delete-word
+bindkey "^[[3;5~" delete-word # use ALT-D
+bindkey "^H" backward-delete-word # use CTRL-W
 
 # ^-Left and ^-Right
-bindkey "^[[1;5D" backward-word
-bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word # use ALT-B
+bindkey "^[[1;5C" backward-word # use ALT-F
 
 # ^W only delete a word
 bindkey "^W" backward-delete-word
@@ -59,7 +52,7 @@ set autoexpand
 set autolist
 
 # Case insensitive completion
-set complete = 'enhance'
+set complete = 'igncase'
 
 # FILESYSTEM NAVIGATION
 # ---------------------
@@ -71,33 +64,24 @@ set pushdsilent
 # pushd without args go to home
 set pushdtohome
 
-# d will display the directory stack,
-# you can then move in the stack using 1 to 9 as aliases
-alias d "dirs -v | tail -n +2 | head -n 9"
-alias 1 "cd =1"
-alias 2 "cd =2"
-alias 3 "cd =3"
-alias 4 "cd =4"
-alias 5 "cd =5"
-alias 6 "cd =6"
-alias 7 "cd =7"
-alias 8 "cd =8"
-alias 9 "cd =9"
-
+setenv DIR_STACK_FILE "$HOME/.dir_stack_tmp"
 setenv DIR_BOOKMARKS "$HOME/.dir_bookmarks"
-alias bkm "pwd >> $DIR_BOOKMARKS && sort --unique --output $DIR_BOOKMARKS $DIR_BOOKMARKS"
-alias cdg 'cd `$HOME/scripts/fzf_bookmarked_dirs.tcsh \!*`'
+if ( ! -f $DIR_BOOKMARKS ) then
+    touch $DIR_BOOKMARKS
+endif
 
 # PROMPT
 # ------
 set green = "%{\033[1;32m%}"
 set blue = "%{\033[1;34m%}"
-set prompt = "╭─%B[tcsh][%j] ${green}%n@%M ${blue}%~/\n%b╰─%B▶%b "
+set end = "%{\033[0m%}"
+# set prompt = "╭─%B[tcsh]${green}%n@%M:${blue}%~/\n%b╰─%B▶${reset} "
+set prompt = "╭─%B[tcsh]${green}%n@%M:${blue}%~/%b\n${end}╰─%B▶%b "
 
 # ALIASES
 # -------
 
 alias 'reload' 'source $HOME/.tcshrc'
 # tcsh alias are not the same as bash and zsh, need to do a little sed magic
-cat "$HOME/.aliases" | sed 's/=/ /' >! "$tcsh_config/tcsh_aliases" && source "$tcsh_config/tcsh_aliases";
+source "$HOME/.caliases"
 
