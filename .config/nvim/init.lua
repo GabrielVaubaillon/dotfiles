@@ -85,7 +85,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Autocompletion options
-vim.opt.completeopt = { 'menuone', 'preview', 'noselect' }
+vim.opt.completeopt = { 'menuone', 'preview' }
 
 -- diff options
 vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60"
@@ -149,7 +149,7 @@ vim.keymap.set("x", "&", ":&&<Enter>")
 
 -- Activate Diff quickly
 vim.keymap.set('n', '<leader>dt', ':diffthis<Enter>')
-vim.keymap.set('n', '<leader>do', ':diffoff<Enter>')
+vim.keymap.set('n', '<leader>do', ':diffoff!<Enter>')
 
 -- toggle wrap
 vim.keymap.set('n', '<leader>tw', ':set wrap!<Enter>')
@@ -159,10 +159,6 @@ vim.keymap.set('n', '<leader>tl', ':set list!<Enter>')
 
 -- toggle line numbers
 vim.keymap.set('n', '<leader>tn', ':set nu! rnu!<Enter>')
-
--- toggle line numbers
-vim.keymap.set('n', '<leader>cc', ':set cc+=53<Enter>')
-vim.keymap.set('n', '<leader>CC', ':set cc-=53<Enter>')
 
 -- make
 vim.keymap.set('n', '<leader>mf', ':make %<Enter>')

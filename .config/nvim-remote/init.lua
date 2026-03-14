@@ -4,6 +4,9 @@
 -- OPTIONS
 ----------
 
+--- use my user shell setup in :term and :!
+vim.opt.shell = "/bin/zsh -i"
+
 -- Use nvim colors
 vim.opt.termguicolors = true
 
@@ -78,14 +81,14 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- do not search some files
-vim.opt.wildignore = "*/__pycache__/*,*/venv/*,*/.venv/*"
+vim.opt.wildignore = "*/__pycache__/*,*/venv/*,*/.venv/*,*/.SYNC/*"
 
 -- When splitting, keep the old window left (vertical), up (horizontal)
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Autocompletion options
-vim.opt.completeopt = { 'menuone', 'preview', 'noselect' }
+vim.opt.completeopt = { 'menuone', 'preview' }
 
 -- diff options
 vim.opt.diffopt = "internal,filler,closeoff,context:6,linematch:60"
@@ -132,9 +135,9 @@ vim.keymap.set('n', ']b', ':bnext<Enter>')
 vim.keymap.set('n', '[b', ':bprevious<Enter>')
 
 -- System clipboard copy paste with leader
-vim.keymap.set({ 'v', 'n' }, '<leader>p', '"+p')
-vim.keymap.set({ 'v', 'n' }, '<leader>y', '"+y')
-vim.keymap.set('n', '<leader>P', '"+P') -- (uppercase)
+-- vim.keymap.set({ 'v', 'n' }, '<leader>p', '"+p')
+-- vim.keymap.set({ 'v', 'n' }, '<leader>y', '"+y')
+-- vim.keymap.set('n', '<leader>P', '"+P') -- (uppercase)
 
 -- Duplicate selection and comment out the first instance.
 -- vim.keymap.set("n", "gcc", "yygcc", { remap = true })
@@ -146,7 +149,7 @@ vim.keymap.set("x", "&", ":&&<Enter>")
 
 -- Activate Diff quickly
 vim.keymap.set('n', '<leader>dt', ':diffthis<Enter>')
-vim.keymap.set('n', '<leader>do', ':diffoff<Enter>')
+vim.keymap.set('n', '<leader>do', ':diffoff!<Enter>')
 
 -- toggle wrap
 vim.keymap.set('n', '<leader>tw', ':set wrap!<Enter>')
@@ -156,10 +159,6 @@ vim.keymap.set('n', '<leader>tl', ':set list!<Enter>')
 
 -- toggle line numbers
 vim.keymap.set('n', '<leader>tn', ':set nu! rnu!<Enter>')
-
--- toggle line numbers
-vim.keymap.set('n', '<leader>cc', ':set cc+=53<Enter>')
-vim.keymap.set('n', '<leader>CC', ':set cc-=53<Enter>')
 
 -- make
 vim.keymap.set('n', '<leader>mf', ':make %<Enter>')
@@ -190,20 +189,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
--- Load help vertical window rather than horizontal
-vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup("vertical_help", { clear = true }),
-    pattern = "help",
-    callback = function()
-        vim.bo.bufhidden = "unload"
-        vim.cmd.wincmd("L")
-        vim.cmd.wincmd("=")
-    end,
-})
-
 -- THEME
 --------
 vim.opt.statusline = "%h %<%f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
-vim.cmd.colorscheme "mocha_custom"
-vim.opt.background = "dark"
+vim.cmd.colorscheme "latte_custom"
 
