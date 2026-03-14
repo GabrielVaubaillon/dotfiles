@@ -193,14 +193,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
--- Keep windows ratio when resizing
-vim.api.nvim_create_autocmd('VimResized', {
-    desc = 'Auto-resize windows on terminal buffer resize',
-    group = vim.api.nvim_create_augroup("WinResize", { clear = true }),
-    pattern = "*",
-    command = "wincmd =",
-})
-
 -- Load help vertical window rather than horizontal
 vim.api.nvim_create_autocmd('FileType', {
     group = vim.api.nvim_create_augroup("vertical_help", { clear = true }),
