@@ -1,18 +1,6 @@
 -- NVIM config
 -- by Gabriel Vaubaillon
 
--- I try to have as much as my config from native
--- vim-nvim features. This file should be easy to modify
--- to work without any plugin.
-
--- Config mode ("main", "remote", "smartphone")
-local config_mode = "main"
--- remote: no plugins, no downloading of spelling dictionaries
--- smartphone: maximize horizontal space (no line numbers, signcolumn only show when needed)
-
--- TODO
---  - marks in sign colum
-
 -- OPTIONS
 ----------
 
@@ -23,22 +11,11 @@ vim.opt.termguicolors = true
 vim.opt.showmode = true
 
 -- Line numbers, relative line number
-if config_mode == "smartphone" then
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-else
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-end
+vim.opt.number = false
+vim.opt.relativenumber = false
 
 -- Sign column
-if config_mode == "remote" or config_mode == "smartphone" then
-    -- Only show if needed
-    vim.opt.signcolumn = 'auto'
-else
-    -- Always insert signcolumn
-    vim.opt.signcolumn = 'yes:1'
-end
+vim.opt.signcolumn = 'auto' -- Only show if needed
 
 -- decrease update time to 200ms
 vim.opt.updatetime = 50
@@ -250,14 +227,6 @@ if config_mode ~= "remote" then
     })
 end
 
--- THEME
---------
-if config_mode == "remote" then
-    vim.opt.statusline = "%h %<%f%m%r %=%(%y[%{&fenc==''?&enc:&fenc}][%l:%c]%)"
-    vim.cmd.colorscheme "mocha_custom"
-    vim.opt.background = "dark"
-end
-
 -- LSP
 ------
 
@@ -295,11 +264,7 @@ vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } 
 -- EXTERNAL
 -----------
 -- Spell checking and "not code" specific config
-if config_mode ~= "remote" then
-    require("prose")
-end
+require("prose")
 
 -- Load all plugins
-if config_mode ~= "remote" then
-    require("plugins")
-end
+require("plugins")
