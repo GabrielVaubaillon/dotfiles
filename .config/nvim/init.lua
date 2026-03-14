@@ -15,7 +15,7 @@ vim.opt.number = false
 vim.opt.relativenumber = false
 
 -- Sign column
-vim.opt.signcolumn = 'auto' -- Only show if needed
+vim.opt.signcolumn = 'yes:1' -- always show (for git plugin + LSP info)
 
 -- decrease update time to 200ms
 vim.opt.updatetime = 50
