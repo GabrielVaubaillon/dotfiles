@@ -40,7 +40,7 @@ alias nvd 'nvim -d'
 alias nvpd 'nvim -c "set filetype=diff"'
 alias diffu 'diff --unified'
 alias diffr "diff --recursive --exclude-from=$HOME/.exclude_patterns"
-alias diffrb "diff --recursive --exclude-from=$HOME/.exclude_patterns --brief"
+alias diffrb "diff --recursive --exclude-from=$HOME/.exclude_patterns --brief \!* | sort"
 alias diffru "diff --recursive --exclude-from=$HOME/.exclude_patterns --unified"
 
 # /* vim: set filetype=tcsh : */
