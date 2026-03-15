@@ -76,7 +76,7 @@ set green = "%{\033[1;32m%}"
 set blue = "%{\033[1;34m%}"
 set end = "%{\033[0m%}"
 # set prompt = "╭─%B[tcsh]${green}%n@%M:${blue}%~/\n%b╰─%B▶${reset} "
-set prompt = "╭─%B[tcsh]${green}%n@%M:${blue}%~/%b\n${end}╰─%B▶%b "
+set prompt = "╭─%B[tcsh]${green}%n@%M:${blue}%//%b\n${end}╰─%B▶%b "
 
 # ALIASES
 # -------
