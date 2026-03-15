@@ -1,31 +1,45 @@
-# my functions
-alias g="go_bookmarked"
-alias d="go_history"
-alias p="go_parents"
 
-alias kb='setxkbmap -model pc105 -layout ie,fr -option grp:alt_shift_toggle -option caps:swapescape'
+alias kb='setxkbmap -layout ie -option ctrl:nocaps'
+alias kbr='setxkbmap -layout ie -option caps:swapescape'
 
-# Editor
-# alias vim='nvim'
-alias nv='nvim'
-alias nvu='nvim --noplugin -u NONE' # launch nvim without any plugin or config
-alias nvd='nvim -d'
-
-alias cd..='cd ..'
-
-# typing is tiring
-alias ls='ls --color=auto'
-alias l='ls -lh'
-alias ll='ls -lh'
-alias la='ls -A'
-alias lla='ls -Alh'
-alias lal='ls -Alh'
-alias tree="tree -C -a -I '.git'"
-
-
-# default optiosn
+# default options for common commands
 alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
 alias grep='grep --color'
+alias ls='ls --color=auto --indicator-style=slash'
+alias diff='diff --color'
+alias tree='tree -a -I ".git|.venv|__pycache__|.idea|.~lock.*"'
+alias ncdu='ncdu --disable-shell --disable-delete --color off'
+alias fzf='fzf --border --layout reverse --height 40%'
 
+# typing makes me tired
+alias l='ls -1'
+alias ll='ls -lh'
+alias la='ls -1A'
+alias lsa='ls -A'
+alias lla='ls -lhA'
+alias lal='ls -lhA'
+alias hg='history | head -n -1 | grep -i'
+alias hist='history | fzf --border --layout reverse --height 40%'
+alias nv='nvim'
+alias cdl='cd $(ls -t -d */ | head -1)'
+
+# custom scripts / functions / "complex aliases"
+alias bkm="pwd >> $DIR_BOOKMARKS && sort --unique --output $DIR_BOOKMARKS $DIR_BOOKMARKS"
+alias cdf='go_furthest'
+alias m='mktimestampdir'
+alias g='go_bookmarked'
+alias d='go_history'
+alias p='go_parents'
+
+# comparing and copying directories and files
+alias cpr="rsync --recursive --copy--links --chmod=ug=rwX --exclude-from=$HOME/.exclude_patterns"
+alias nvd='nvim -d'
+alias nvpd='nvim -c "set filetype=diff"'
+alias diffu='diff --unified'
+alias diffr="diff --recursive --exclude-from=$HOME/.exclude_patterns"
+diffrb() { diff --recursive --exclude-from=$HOME/.exclude_patterns --brief $@ | sort }
+alias diffru="diff --recursive --exclude-from=$HOME/.exclude_patterns --unified"
+
+silent() { $@ > /dev/null 2>&1; }
+
+# /* vim: set filetype=zsh : */

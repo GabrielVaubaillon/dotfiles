@@ -1,0 +1,77 @@
+# create a directory with a timestamp
+mktimestampdir() {
+    if [[ $# > 1 ]]; then
+        echo "ERROR: too many arguments, expecting 0 or 1"
+        return 1
+    fi
+    local timestamp=$(date "+%Y-%m-%d")
+    if [[ $# == 0 ]]; then
+        mkdir $timestamp &&
+        echo $timestamp
+    else
+        mkdir ${timestamp}_$1 &&
+        echo ${timestamp}_$1
+    fi
+}
+
+# go to the furthest accessible path
+go_furthest() { cd $(furthest-path $@) }
+
+# go to a previously bookmarked path, with FZF selection
+go_bookmarked() {
+    local dest
+    if [[ $# > 1 ]]; then
+        return 1
+    fi
+    if [[ $# == 0 ]]; then
+        dest=$(fzf --border --layout reverse --height 40% < $DIR_BOOKMARKS)
+    else
+        dest=$(fzf --border --layout reverse --height 40% --select-1 --query $1 < $DIR_BOOKMARKS)
+    fi
+    if [[ ! -z $dest ]]; then
+        cd $dest
+        return 0
+    fi
+    return 1
+}
+
+# go to a previously visited path, with FZF selection
+go_history() {
+    local dest
+    if [[ $# > 1 ]]; then
+        return 1
+    fi
+    if [[ $# == 0 ]]; then
+        dest=$(dirs -lp | tail -n +2 | fzf --border --layout reverse --height 40% --no-sort)
+    else
+        dest=$(dirs -lp | tail -n +2 | fzf --border --layout reverse --height 40% --no-sort --select-1 --query $1 )
+    fi
+    if [[ ! -z $dest ]]; then
+        cd $dest
+        return 0
+    fi
+    return 1
+}
+
+# go to a parent with fuzzy matching
+go_parents() {
+    # This simple oneliner allows to do it with exact match
+    # cdu () { cd "${PWD%/$1/*}/$1"; }
+    if [[ $# > 1 ]]; then
+        return 1
+    fi
+    local dest
+    local cwd=$(pwd)
+    if [[ $# == 0 ]]; then
+        dest=$(parents.py $cwd | fzf --border --layout reverse --height 40%)
+    else
+        dest=$(parents.py $cwd | fzf --filter $1 | head -n 1)
+    fi
+    if [[ -z $dest ]]; then
+        return 1
+    fi
+    cd $dest
+    return 0
+}
+
+# /* vim: set filetype=zsh : */

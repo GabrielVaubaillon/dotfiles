@@ -14,24 +14,28 @@ if [ ! -d $zsh_config ]; then
     mkdir -p $zsh_config
 fi
 
-# KEYS
-# ----
+# LINE EDIT
+# ---------
+
+# (removed ':' and '/')
+WORDCHARS='*?._-[]~=&;!#$%^(){}<>'
 
 # Del
-bindkey "^[[3~" delete-char
+bindkey "^[[3~" delete-char # use CTRL-D
 
 # ^Del and ^Backspace
-bindkey "^[[3;5~" kill-word
-bindkey "^H" backward-kill-word
+bindkey "^[[3;5~" kill-word # use ALT-D
+bindkey "^H" backward-kill-word  # use CTRL-W
 
 # ^-Left and ^-Right
-bindkey "^[[1;5D" backward-word
-bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word # use ALT-B
+bindkey "^[[1;5C" forward-word # use ALT-F
+
+# Allow comment in interactive shell
+setopt interactive_comments
 
 # MISC
 # ----
-
-WORDCHARS='*?._-[]~=&;!#$%^(){}<>'
 
 # No beep
 unsetopt  beep
@@ -51,8 +55,6 @@ unsetopt flow_control
 # to avoid the shell hanging if its tty goes away.
 setopt ignore_eof
 
-# Allow comment in interactive shell
-setopt interactive_comments
 
 # report status of job asynchronously
 setopt notify
@@ -119,60 +121,16 @@ setopt pushd_to_home
 
 # Bookmarks for directories, with FZF
 DIR_BOOKMARKS="$HOME/.dir_bookmarks"
-alias bkm="pwd >> $DIR_BOOKMARKS && sort --unique --output $DIR_BOOKMARKS $DIR_BOOKMARKS"
-go_bookmarked() {
-    local dest
-    if [[ $# > 1 ]]; then
-        return 1
-    fi
-    if [[ $# == 0 ]]; then
-        dest=$(fzf --border --layout reverse --height 40% < $DIR_BOOKMARKS)
-    else
-        dest=$(fzf --border --layout reverse --height 40% --select-1 --query $1 < $DIR_BOOKMARKS)
-    fi
-    if [[ ! -z $dest ]]; then
-        cd $dest
-        return 0
-    fi
-    return 1
-}
+if [ ! -f $DIR_BOOKMARKS ]; then
+    touch $DIR_BOOKMARKS
+fi
 
-go_history() {
-    local dest
-    if [[ $# > 1 ]]; then
-        return 1
-    fi
-    if [[ $# == 0 ]]; then
-        dest=$(dirs -lp | tail -n +2 | fzf --border --layout reverse --height 40% --no-sort)
-    else
-        dest=$(dirs -lp | tail -n +2 | fzf --border --layout reverse --height 40% --no-sort --select-1 --query $1 )
-    fi
-    if [[ ! -z $dest ]]; then
-        cd $dest
-        return 0
-    fi
-    return 1
-}
+if [ -f "$HOME/.zfuncs" ]; then
+    source "$HOME/.zfuncs"
+else
+    echo "error:cannot find $HOME/.zfuncs"
+fi
 
-go_parents() {
-    # This simple oneliner allows to do it with exact match
-    # cdu () { cd "${PWD%/$1/*}/$1"; }
-    if [[ $# > 1 ]]; then
-        return 1
-    fi
-    local dest
-    local cwd=$(pwd)
-    if [[ $# == 0 ]]; then
-        dest=$($HOME/scripts/parents.py $cwd | fzf --border --layout reverse --height 40%)
-    else
-        dest=$($HOME/scripts/parents.py $cwd | fzf --filter $1 | head -n 1)
-    fi
-    if [[ -z $dest ]]; then
-        return 1
-    fi
-    cd $dest
-    return 0
-}
 
 # k : better ls -l, with git status of file & directories
 local k_src="$zsh_config/zsh-k/k.sh"
@@ -211,7 +169,11 @@ function () {
 # -------
 
 alias 'reload'='source $HOME/.zshrc'
-source "$HOME/.aliases"
+if [ -f "$HOME/.aliases" ]; then
+    source "$HOME/.aliases"
+else
+    echo "error: cannot find $HOME/.aliases"
+fi
 
 # Syntax Highlighting - must be loaded last
 local syntax_hl_src="$zsh_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
