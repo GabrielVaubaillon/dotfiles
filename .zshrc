@@ -174,6 +174,9 @@ if [ -f "$HOME/.aliases" ]; then
 else
     echo "error: cannot find $HOME/.aliases"
 fi
+if [ ! -f "$HOME/.exclude_patterns" ]; then
+    touch "$HOME/.exclude_patterns"
+fi
 
 # Syntax Highlighting - must be loaded last
 local syntax_hl_src="$zsh_config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
