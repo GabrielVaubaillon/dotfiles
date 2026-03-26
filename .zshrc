@@ -63,8 +63,13 @@ setopt notify
 # -------
 
 HISTFILE="$HOME/.zhistory"
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000000
+SAVEHIST=1000000
+
+# share history between zsh sessions
+setopt share_history
+# add time info of commands: ‘: <beginning time>:<elapsed seconds>;<command>'
+setopt extended_history
 
 # Do not record an event starting with a space.
 setopt hist_ignore_space
