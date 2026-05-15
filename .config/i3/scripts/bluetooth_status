@@ -6,10 +6,17 @@ import sys
 # first check that the controller is active. If not working. still try devices connected
 status = subprocess.run(
     ["bluetoothctl", "show"],
-    check=True,
+    check=False,
     capture_output=True,
     text=True,
 )
+
+if status.returncode:
+    if status.stderr:
+        print("error:", status.stderr.strip())
+    else:
+        print("error:", status.stdout.strip())
+    sys.exit(0)
 
 powerstate: None | str = None
 if not status.returncode:
@@ -26,7 +33,7 @@ if not status.returncode:
 # get info about connected device:
 status = subprocess.run(
     ["bluetoothctl", "devices", "Connected"],
-    check=True,
+    check=False,
     capture_output=True,
     text=True,
 )
